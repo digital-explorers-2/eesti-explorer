@@ -31,6 +31,7 @@ Functionalities
 15. A user can add destinations to their wishlist.
 16. A user can select different tour destinations.
 17. A user can get a digital reciept of their transactions.
+18. A user can pay after booking
 
 
 
