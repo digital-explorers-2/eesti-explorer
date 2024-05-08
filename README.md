@@ -32,6 +32,9 @@ Functionalities
 16. A user can select different tour destinations.
 17. A user can get a digital reciept of their transactions.
 18. A user can pay after booking
+19. A user should be able to navigate the tour guides page
+20. A user could edit the profile page
+21. A user should choose the location date and time to book a tour guide
 
 
 
