@@ -28,5 +28,9 @@ Functionalities
 12. A user can reset their password.
 13. A user can contact customer support.
 14. A user can provide feedback on the platform by filling in the contact us form.
+15. A user can add destinations to their wishlist.
+16. A user can select different tour destinations.
+17. A user can get a digital reciept of their transactions.
+
 
 
