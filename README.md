@@ -37,4 +37,10 @@ Functionalities
 21. A user should choose the location date and time to book a tour guide
 
 
+Project WireFrames 
+1. Landing Page
+<img width="304" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/3b863aee-2de2-4081-96bc-67aeb372e784">
+
+
+
 
