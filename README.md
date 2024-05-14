@@ -38,7 +38,65 @@ Functionalities
 16. A user can select different tour destinations.
 17. A user can get a digital reciept of their transactions.
 18. A user can pay after booking
-19. Comment/....
+19. A user should be able to navigate the tour guides page
+20. A user could edit the profile page
+21. A user should choose the location date and time to book a tour guide
+
+
+Project WireFrames 
+
+1. Landing Page <br>
+
+<img width="315" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/4b40eb63-a2cf-41e4-9b6b-504dc275d8c0">
+ <br>
+
+<img width="315" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/c7dc4a38-b20c-47b7-a992-f5bf323b6308">
+<br>
+
+<img width="317" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/3f160ab2-ce4d-4a44-8067-c9300d3de525">
+
+
+
+2. Tourist Destinations 
+
+<img width="278" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/fd58ae9a-1e5d-435f-9c67-590ae8bd78e9">
+
+3. Destinations Page
+
+<img width="357" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/b9195ffc-6fa8-4cef-b1eb-2000a9d47b20">
+
+4. Tour Guides
+
+<img width="338" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/39ab9ac1-c277-43d2-8ad4-e735e55d7202">
+   
+5. Billing Summary
+
+<img width="406" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/15d32073-d30b-4985-9066-ae2f3c2ad4be">
+
+6. Payment Details
+   
+<img width="531" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/7e70e52e-6c91-4977-a2fe-fe02c09b63b2">
+
+8. Profile Page
+   
+<img width="436" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/9bcc458f-1338-4f01-8d12-ceb14711f89d">
+
+<br>
+
+<img width="432" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/1be6d0f1-fc38-4cd1-9c81-d55610bdba54">
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
