@@ -79,6 +79,11 @@ Project WireFrames
 
 <img width="432" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/1be6d0f1-fc38-4cd1-9c81-d55610bdba54">
 
+#Database Schema 
+
+![EestiDatabaseSchema drawio (1)](https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/6d8796fa-e8dc-4e51-8ccd-613e7422a522)
+
+
 
 
 
