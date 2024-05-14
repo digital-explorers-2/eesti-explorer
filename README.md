@@ -40,6 +40,35 @@ Functionalities
 Project WireFrames 
 1. Landing Page
 <img width="304" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/3b863aee-2de2-4081-96bc-67aeb372e784">
+<img width="193" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/f02f05f5-3c5c-40f7-acc6-b6fa75b0de63">
+
+2.Tourist Destinations 
+<img width="278" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/fd58ae9a-1e5d-435f-9c67-590ae8bd78e9">
+
+3. Destinations Page
+
+   <img width="357" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/b9195ffc-6fa8-4cef-b1eb-2000a9d47b20">
+
+4. Tour Guides
+
+   <img width="338" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/39ab9ac1-c277-43d2-8ad4-e735e55d7202">
+   
+5. Billing Summary
+   <img width="406" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/15d32073-d30b-4985-9066-ae2f3c2ad4be">
+
+6. Payment Details
+<img width="531" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/7e70e52e-6c91-4977-a2fe-fe02c09b63b2">
+
+7. Profile Page
+   
+   <img width="323" alt="image" src="https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/a61b3cf3-af53-447e-8454-071f97b9bf1e">
+
+
+
+
+
+
+
 
 
 
