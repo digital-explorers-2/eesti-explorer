@@ -1,4 +1,4 @@
-import Logo from "@/components/images/logo.png"
+import Logo from "@/components/images/LandingPage/logo.png"
 import Image from "next/image";
 import MediumButton from "@/components/MediumButton";
 
