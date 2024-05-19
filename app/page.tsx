@@ -1,32 +1,31 @@
-import { createClient } from "@/utils/supabase/server";
+'use client'
+import React,{useRef} from "react"
+import { createClient } from "@/utils/supabase/client";
 import Navbar from "@/components/LandingPage/Navbar";
+import Home from "@/components/LandingPage/Home";
+import Destinations from "@/components/LandingPage/Destinations";
 
 
-export default async function Index() {
+export default function Index() {
   const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
     try {
       createClient();
       return true;
     } catch (e) {
       return false;
     }
-  };
-
+  };  
   const isSupabaseConnected = canInitSupabaseClient();
-
   return (
-    <div className="">
+    <div>
       <Navbar/>
-
-      <div className="">
-        <main className="">
+      <div >
+        <main >
           {/* {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />} */}
-
+          <Home/>
+          <Destinations/>
         </main>
       </div>
-
     </div>
   );
 }
