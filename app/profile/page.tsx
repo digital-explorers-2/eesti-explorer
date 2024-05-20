@@ -5,7 +5,13 @@ import Navbar from "../../components/LandingPage/Navbar";
 export default function Profile(){
 return(
 
+    <>
     <Navbar/>
+    <div>
+        <h1>My Profile</h1>
+    </div>
+
+    </>
 )
 
 }
