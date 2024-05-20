@@ -1,4 +1,3 @@
-import Home from "../../components/LandingPage/Home";
 import Navbar from "../../components/LandingPage/Navbar";
 
 //navbar
