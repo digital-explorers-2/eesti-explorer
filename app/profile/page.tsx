@@ -1,3 +1,4 @@
+import Home from "../../components/LandingPage/Home";
 import Navbar from "../../components/LandingPage/Navbar";
 
 //navbar
@@ -5,7 +6,13 @@ import Navbar from "../../components/LandingPage/Navbar";
 export default function Profile(){
 return(
 
+    <>
     <Navbar/>
+    <div>
+        <h1>My Profile</h1>
+    </div>
+
+    </>
 )
 
 }
