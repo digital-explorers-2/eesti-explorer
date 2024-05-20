@@ -52,41 +52,38 @@ export default function Login({
   };
 
   return (
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
+
+       <div className="flex-1 flex flex-col ">
+       <img src="/image.png"  alt="No image" width={200} height={400} margin-top={80} />
+      
       <Link
         href="/"
-        className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
+        className="animate-in absolute left-20 top-20 py-1 px-10 no-underline  flex items-center text-black font-roboto font-semibold bg-orange-500 
+        hover:bg-white
+        hover:text-orange-500 hover:border-orange-500 border-2 border-transparent rounded-md transition duration-300 ease-in-out "
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
-        >
-          <polyline points="15 18 9 12 15 6" />
-        </svg>{" "}
         Back
       </Link>
 
-      <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
+      <div className="animate-in flex items-center justify-center h-screen">
+      <div className="bg-orange-50 p-8 rounded-lg shadow-lg text-black font-roboto font-semibold border-orange-500 border-2">
+      <form className="w-96 flex flex-col justify-center gap-2 ">
+
         <label className="text-md" htmlFor="email">
           Email
         </label>
+
         <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          className="rounded-md px-4 py-2 bg-inherit border mb-6" 
           name="email"
           placeholder="you@example.com"
           required
         />
+
         <label className="text-md" htmlFor="password">
           Password
         </label>
+
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
           type="password"
@@ -94,26 +91,38 @@ export default function Login({
           placeholder="••••••••"
           required
         />
+
         <SubmitButton
           formAction={signIn}
-          className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2"
+          className="bg-orange-500 rounded-md px-4 py-2  mb-2 text-black hover:bg-white
+          hover:text-orange-500 hover:border-orange-500 border-2 border-transparent rounded-md transition duration-300 ease-in-out "
           pendingText="Signing In..."
         >
           Sign In
         </SubmitButton>
+
         <SubmitButton
           formAction={signUp}
-          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
+          className="border border-foreground/20 rounded-md px-4 py-2  mb-2 text-black hover:bg-white
+          hover:text-orange-500 hover:border-orange-500 border-2 border-transparent rounded-md transition duration-300 ease-in-out"
           pendingText="Signing Up..."
         >
           Sign Up
         </SubmitButton>
         {searchParams?.message && (
-          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
+          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center   ">
             {searchParams.message}
           </p>
         )}
-      </form>
+
+      
+        
+    </form>
     </div>
+    
+
+    </div>
+    </div>
+
   );
 }
