@@ -35,5 +35,11 @@
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
     "encoding": "^0.1.13"
-  }
+  },
+  "name": "eesti-explorer",
+  "version": "1.0.0",
+  "description": "Project Name :Eesti Explorer",
+  "main": "next.config.js",
+  "author": "",
+  "license": "ISC"
 }
