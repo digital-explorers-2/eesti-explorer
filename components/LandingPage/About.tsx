@@ -9,7 +9,7 @@ export default function About() {
         <div id="words_left" className="w-[50%] pt-3">
             <div>
                 <p className="text-[#F57906]">Why choose us?</p>
-                <h1 className="font-bold text-3xl leading-relaxed">Choose Eestie Explorer To Experience Estonia.</h1>
+                <h1 className="font-bold text-3xl leading-relaxed">Choose Eestie Explorer To Experience Estonia</h1>
             </div>
             <div className="pr-10">
                 <p className="text-sm leading-loose pt-3">
