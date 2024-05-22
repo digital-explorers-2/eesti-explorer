@@ -5,6 +5,7 @@ import Navbar from "@/components/LandingPage/Navbar";
 import Home from "@/components/LandingPage/Home";
 import Destinations from "@/components/LandingPage/Destinations";
 import About from "@/components/LandingPage/About";
+import Testimonial from "@/components/LandingPage/Testimonial";
 
 
 export default function Index() {
@@ -26,6 +27,7 @@ export default function Index() {
           <Home/>
           <Destinations/>
           <About/>
+          <Testimonial/>
         </main>
       </div>
     </div>
