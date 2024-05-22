@@ -21,18 +21,38 @@ export default function Login({
   const customTheme = {
     default: {
       colors: {
-        brand: 'hsl(27, 100%, 60%)', // Orange color for buttons
-        brandAccent: 'hsl(27, 100%, 50%)', // Slightly darker orange for hover
-        brandButtonText: 'white', // White text for buttons
-        // Additional colors to match the login page theme
-        inputBackground: 'hsl(30, 100%, 97%)', // Light cream background for input fields
-        inputText: 'hsl(0, 0%, 20%)', // Dark text for input fields
-        inputPlaceholder: 'hsl(0, 0%, 50%)', // Placeholder text color
-        buttonText: 'white', // White text for buttons
+        brand: 'hsl(27, 100%, 60%)', 
+        brandAccent: 'hsl(27, 100%, 50%)', 
+        brandButtonText: 'white', 
+        inputBackground: 'hsl(30, 100%, 97%)', 
+        inputPlaceholder: 'hsl(0, 0%, 70%)', 
+        buttonText: 'white', 
         buttonBackground: 'hsl(27, 100%, 60%)', // Orange background for buttons
         buttonBackgroundHover: 'hsl(27, 100%, 50%)', // Darker orange on hover
         background: 'hsl(30, 100%, 97%)', // Light cream background for the form
         text: 'hsl(0, 0%, 20%)', // Dark text for general text
+      },
+      space: {
+        spaceSmall: '4px',
+        spaceMedium: '8px',
+        spaceLarge: '16px',
+        labelBottomMargin: '8px',
+        anchorBottomMargin: '4px',
+        emailInputSpacing: '4px',
+        socialAuthSpacing: '4px',
+        buttonPadding: '10px 15px',
+        inputPadding: '10px 15px',
+      },
+      fontSizes: {
+        baseBodySize: '13px',
+        baseInputSize: '17px',
+        baseLabelSize: '17px',
+        baseButtonSize: '17px',
+      },
+      radii: {
+        borderRadiusButton: '4px',
+        buttonBorderRadius: '4px',
+        inputBorderRadius: '4px',
       },
     },
     dark: {
@@ -40,7 +60,7 @@ export default function Login({
         brandButtonText: 'white',
         defaultButtonBackground: '#2e2e2e',
         defaultButtonBackgroundHover: '#3e3e3e',
-        //..
+       
       },
     },
     evenDarker: {
@@ -48,7 +68,7 @@ export default function Login({
         brandButtonText: 'white',
         defaultButtonBackground: '#1e1e1e',
         defaultButtonBackgroundHover: '#2e2e2e',
-        //..
+  
       },
     },
   };
@@ -118,11 +138,12 @@ export default function Login({
 
   return (
     <div className="flex flex-1 h-screen justify-center items-center">
-      <div className="max-w-md">
+      <div className="max-w-md py-16 px-16 mx-auto bg-white rounded-xl shadow-2xl shadow-orange-500/50 space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 outline outline-offset-2 outline-orange-500">
               <Auth
         supabaseClient={supabase}
         appearance={{ theme: customTheme }}
         providers={['google']}
+      
       />
       </div>
 
