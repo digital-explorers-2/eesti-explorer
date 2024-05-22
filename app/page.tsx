@@ -1,9 +1,10 @@
 'use client'
-import React,{useRef} from "react"
+import React from "react"
 import { createClient } from "@/utils/supabase/client";
 import Navbar from "@/components/LandingPage/Navbar";
 import Home from "@/components/LandingPage/Home";
 import Destinations from "@/components/LandingPage/Destinations";
+import About from "@/components/LandingPage/About";
 
 
 export default function Index() {
@@ -24,6 +25,7 @@ export default function Index() {
           {/* {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />} */}
           <Home/>
           <Destinations/>
+          <About/>
         </main>
       </div>
     </div>
