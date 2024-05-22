@@ -76,8 +76,8 @@ export default function Destinations() {
     return (
         <section id="destinations" className="px-20 py-10">
             <div>
-            <p className="text-[#F57906]">Famous Destinations!</p>
-            <h1 className="font-bold text-2xl">Our Popular <span className="text-[#F57906]">Destinations</span></h1>
+                <p className="text-[#F57906]">Famous Destinations!</p>
+                <h1 className="font-bold text-2xl">Our Popular <span className="text-[#F57906]">Destinations</span></h1>
             </div>
             <div>
             <Carousel opts={{align:"start"}} className="w-full max-w-small pt-5 border-none" plugins={[plugin.current]} onMouseEnter={()=>plugin.current.stop()} onMouseLeave={()=>plugin.current.play()}>
