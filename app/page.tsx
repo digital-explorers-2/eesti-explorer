@@ -6,6 +6,7 @@ import Home from "@/components/LandingPage/Home";
 import Destinations from "@/components/LandingPage/Destinations";
 import About from "@/components/LandingPage/About";
 import Testimonial from "@/components/LandingPage/Testimonial";
+import Subscribe from "@/components/LandingPage/Subscribe";
 
 
 export default function Index() {
@@ -28,6 +29,7 @@ export default function Index() {
           <Destinations/>
           <About/>
           <Testimonial/>
+          <Subscribe/>
         </main>
       </div>
     </div>
