@@ -6,7 +6,7 @@ import MediumButton from '../MediumButton'
 
 export default function Subscribe() {
   return (
-    <section id='subscribe' className='flex justify-between gap-10 px-10 mt-20 pb-5'>
+    <section id='subscribe' className='flex justify-between gap-10 px-10 py-32'>
         <div>
             <Image src={PlaneLeft} alt='aircraft' />
         </div>
