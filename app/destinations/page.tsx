@@ -1,7 +1,8 @@
+"use client"
 import Footer from '@/components/Footer'
 import Heading from '@/components/Heading'
 import Navbar from '@/components/Navbar'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'  
 import Kadriog from '@/components/images/DestinationsPage/kadriog.png'
 import Gates from "@/components/images/DestinationsPage/gates.png";
@@ -10,6 +11,7 @@ import NarvaBog from "@/components/images/DestinationsPage/narva_bog.png";
 import ParnuTower from "@/components/images/DestinationsPage/parnu_tower.png";
 import TallinnCityMuseum from "@/components/images/DestinationsPage/tallinn_city_museum.png";
 import { FaMap } from "react-icons/fa";
+import { destinationsRead } from './actions'
 
 const DestinationsDetails = [
   {
@@ -57,6 +59,20 @@ const DestinationsDetails = [
 ]
 
 export default function page() {
+  const [destinations, setDestinations] = useState<any>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+        const response = await destinationsRead();
+        setDestinations(response);
+      }
+      catch(error){
+        throw new Error('Error fetching destinations')
+      }
+    }
+    fetchData();
+  },[])
   return (
     <>
         <Navbar/>
@@ -64,10 +80,10 @@ export default function page() {
             <Heading underlinedText='Tourist' otherText=' Destinations'/>
         </div>
         <div className='px-20 grid grid-cols-3 gap-x-10 gap-y-16 py-14'>
-          {DestinationsDetails.map((destination) => (
+          {destinations.map((destination:any) => (
               <div className='px-5 py-5 bg-white border-[1.5px] rounded-xl' key={destination.id}>
               <Image alt='place' src={destination.image}/>
-              <h1 className='text-sm font-bold pt-5'>{destination.title}</h1>
+              <h1 className='text-sm font-bold pt-5'>{destination.name}</h1>
               <p className='pt-3 text-[12.5px]'>
                 {destination.description.length>160 ? destination.description.substring(0, 160)+'...':destination.description  }
               </p>
