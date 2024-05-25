@@ -1,7 +1,7 @@
 'use client'
 import React from "react"
 import { createClient } from "@/utils/supabase/client";
-import Navbar from "@/components/LandingPage/Navbar";
+import Navbar from "@/components/Navbar";
 import Home from "@/components/LandingPage/Home";
 import Destinations from "@/components/LandingPage/Destinations";
 import About from "@/components/LandingPage/About";

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import Navbar from "../../components/LandingPage/Navbar";
+import Navbar from "../../components/Navbar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function Profile() {
