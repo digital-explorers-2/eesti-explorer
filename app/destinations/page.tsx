@@ -16,7 +16,7 @@ const DestinationsDetails = [
     id:1,
     image: Kadriog,
     title: 'Old Town',
-    description: 'Old Town: Historic charm, cobblestone streets, quaint shops, and cultural delights lure visitors to its timeless embrace.',
+    description: 'Old Town: Historic charm, cobblestone streets, quaint shops, and cultural delights lure visitors to its timeless embrace. Nestled within ancient city walls, Old Town offers a mesmerizing journey through history with its medieval architecture, vibrant markets, and cozy cafes.',     
     location: 'Tallinn' 
   },
   {
@@ -63,13 +63,13 @@ export default function page() {
         <div className='text-center mt-5'>
             <Heading underlinedText='Tourist' otherText=' Destinations'/>
         </div>
-        <div className='px-20 grid grid-cols-3 gap-x-10 gap-y-16 py-20'>
+        <div className='px-20 grid grid-cols-3 gap-x-10 gap-y-16 py-14'>
           {DestinationsDetails.map((destination) => (
               <div className='px-5 py-5 bg-white border-[1.5px] rounded-xl' key={destination.id}>
               <Image alt='place' src={destination.image}/>
               <h1 className='text-sm font-bold pt-5'>{destination.title}</h1>
               <p className='pt-3 text-[12.5px]'>
-                {destination.description}
+                {destination.description.length>160 ? destination.description.substring(0, 160)+'...':destination.description  }
               </p>
               <div className='flex justify-between'>
                 <div className='flex gap-5 text-sm pt-3'>
