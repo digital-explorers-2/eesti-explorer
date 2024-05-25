@@ -22,13 +22,15 @@ export default function Testimonial() {
             image: TestimonialImage2,
             name: "Sandra Tona",  
             origin: "from Kenya",
-            comment: "I recently visited Estonia for the first time and used this app to plan my trip. I was blown away by the experience! The app was extremely user-friendly, allowing me to easily tailor our tour to match my specific interests."        },
+            comment: "I recently visited Estonia for the first time and used this app to plan my trip. I was blown away by the experience! The app was extremely user-friendly, allowing me to easily tailor our tour to match my specific interests."        
+        },
         {
             id:3,
             image: TestimonialImage3,
             name: "Nancy Pedro",  
             origin: "from France",
-            comment: "On my first trip to Estonia, I decided to use this app and was thoroughly impressed. The app was intuitive and user-friendly, making it simple to customize our tour according to my personal preferences."          },
+            comment: "On my first trip to Estonia, I decided to use this app and was thoroughly impressed. The app was intuitive and user-friendly, making it simple to customize our tour according to my personal preferences."          
+        },
     ]
   return (
     <section className="w-full px-24 pt-14 flex flex-col align-middle justify-center" id='testimonials'>
