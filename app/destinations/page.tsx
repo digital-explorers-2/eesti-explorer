@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer'
 import Heading from '@/components/Heading'
-import Navbar from '@/components/LandingPage/Navbar'
+import Navbar from '@/components/Navbar'
 import React from 'react'
 import Image from 'next/image'  
 import Kadriog from '@/components/images/DestinationsPage/kadriog.png'
