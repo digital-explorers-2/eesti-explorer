@@ -1,7 +1,8 @@
+"use client"
 import Footer from '@/components/Footer'
 import Heading from '@/components/Heading'
-import Navbar from '@/components/LandingPage/Navbar'
-import React from 'react'
+import Navbar from '@/components/Navbar'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'  
 import Kadriog from '@/components/images/DestinationsPage/kadriog.png'
 import Gates from "@/components/images/DestinationsPage/gates.png";
@@ -10,13 +11,14 @@ import NarvaBog from "@/components/images/DestinationsPage/narva_bog.png";
 import ParnuTower from "@/components/images/DestinationsPage/parnu_tower.png";
 import TallinnCityMuseum from "@/components/images/DestinationsPage/tallinn_city_museum.png";
 import { FaMap } from "react-icons/fa";
+import { destinationsRead } from './actions'
 
 const DestinationsDetails = [
   {
     id:1,
     image: Kadriog,
     title: 'Old Town',
-    description: 'Old Town: Historic charm, cobblestone streets, quaint shops, and cultural delights lure visitors to its timeless embrace.',
+    description: 'Old Town: Historic charm, cobblestone streets, quaint shops, and cultural delights lure visitors to its timeless embrace. Nestled within ancient city walls, Old Town offers a mesmerizing journey through history with its medieval architecture, vibrant markets, and cozy cafes.',     
     location: 'Tallinn' 
   },
   {
@@ -57,19 +59,34 @@ const DestinationsDetails = [
 ]
 
 export default function page() {
+  const [destinations, setDestinations] = useState<any>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+        const response = await destinationsRead();
+        setDestinations(response);
+        console.log(response)
+      }
+      catch(error){
+        throw new Error('Error fetching destinations')
+      }
+    }
+    fetchData();
+  },[])
   return (
     <>
         <Navbar/>
         <div className='text-center mt-5'>
             <Heading underlinedText='Tourist' otherText=' Destinations'/>
         </div>
-        <div className='px-20 grid grid-cols-3 gap-x-10 gap-y-16 py-20'>
-          {DestinationsDetails.map((destination) => (
-              <div className='px-5 py-5 bg-white border-[1.5px] rounded-xl' key={destination.id}>
+        <div className='px-20 grid grid-cols-3 gap-x-10 gap-y-16 py-14'>
+          {destinations.map((destination:any) => (
+              <div className='px-5 py-5 bg-white border-[1.5px] rounded-xl' key={destination.destinations_id}>
               <Image alt='place' src={destination.image}/>
-              <h1 className='text-sm font-bold pt-5'>{destination.title}</h1>
+              <h1 className='text-sm font-bold pt-5'>{destination.name}</h1>
               <p className='pt-3 text-[12.5px]'>
-                {destination.description}
+                {destination.description.length>160 ? destination.description.substring(0, 160)+'...':destination.description  }
               </p>
               <div className='flex justify-between'>
                 <div className='flex gap-5 text-sm pt-3'>

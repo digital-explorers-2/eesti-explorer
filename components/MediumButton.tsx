@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function MediumButton({children}:{children:React.ReactNode}) {
+export default function MediumButton({children, onClick}:{children:React.ReactNode, onClick?:()=>void}) {
   return (
     <>
-        <button className="text-sm bg-[#F57906] px-7 py-3 rounded-[7px] text-white font-semibold">{children}</button>
+        <button onClick={onClick} className="text-sm bg-[#F57906] px-7 py-3 rounded-[7px] text-white font-semibold">{children}</button>
     </>
   )
 }
