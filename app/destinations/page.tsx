@@ -66,6 +66,7 @@ export default function page() {
       try{
         const response = await destinationsRead();
         setDestinations(response);
+        console.log(response)
       }
       catch(error){
         throw new Error('Error fetching destinations')
@@ -81,7 +82,7 @@ export default function page() {
         </div>
         <div className='px-20 grid grid-cols-3 gap-x-10 gap-y-16 py-14'>
           {destinations.map((destination:any) => (
-              <div className='px-5 py-5 bg-white border-[1.5px] rounded-xl' key={destination.id}>
+              <div className='px-5 py-5 bg-white border-[1.5px] rounded-xl' key={destination.destinations_id}>
               <Image alt='place' src={destination.image}/>
               <h1 className='text-sm font-bold pt-5'>{destination.name}</h1>
               <p className='pt-3 text-[12.5px]'>
