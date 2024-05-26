@@ -41,7 +41,7 @@ export default function () {
   //function to get user initials
 
   return (
-    <nav className="px-10 py-5 flex gap-[18%]">
+    <nav className="px-10 py-5 flex gap-[22%]">
         <a href="/">
           <div id="logo" className="flex align-middle">
             <div>
@@ -58,7 +58,6 @@ export default function () {
             <li><a href="/about">About</a></li>
             <li><a href="/cart">Cart</a></li>
             <li><a href="/destinations">Destinations</a></li>
-            <li><a href="#help">Help</a></li>
           </ul>
         </div>
         <div>
