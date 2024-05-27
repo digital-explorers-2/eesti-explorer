@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { FaMap } from "react-icons/fa";
-import { destinationsRead } from '../destinations/actions'
+import { guideRead } from '../tour-guide/actions'
 
 
 export default function Guides() {
@@ -14,7 +14,7 @@ export default function Guides() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await destinationsRead();
+        const response = await guideRead();
         setGuides(response);
         console.log(response)
       }
