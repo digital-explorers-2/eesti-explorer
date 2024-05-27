@@ -20,7 +20,7 @@ export default function About() {
                 </p>
             </div>
             <div className="pt-5">
-                <MediumButton >Learn more</MediumButton>
+                <MediumButton ><a href="/about">Learn more</a></MediumButton>
             </div>
             <div className='pt-10 flex gap-24'>
                 <div>
