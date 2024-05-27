@@ -74,7 +74,7 @@ export default function Profile() {
                                 </div>
 
                                 <div className="mt-5">
-                                    <Button type="submit" className="bg-[#F57906] text-white mt-5 rounded-none px-20 py-7">Save Changes</Button>
+                                    <Button type="submit" style={{backgroundColor:"#F57906", color:"white"}} className="bg-[#F57906] text-white mt-5 rounded-none px-20 py-7">Save Changes</Button>
                                 </div>
                             </form>
                         </div>

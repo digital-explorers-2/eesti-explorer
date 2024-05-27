@@ -118,10 +118,12 @@ export default function Destinations() {
             </div>
             <div className="flex xl:float-end md:align-middle md:justify-center mt-1 pr-9">
             <MediumButton>
+              <a href="/destinations">
                 <div className="flex gap-1">
-                <p>See All</p>
-                <IoIosArrowForward className="text-white font-bold text-base pt-0.5"/> 
+                  <p>See All</p>
+                  <IoIosArrowForward className="text-white font-bold text-base pt-0.5"/> 
                 </div>
+              </a>
             </MediumButton>
             </div>
         </section>

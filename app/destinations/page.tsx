@@ -60,6 +60,7 @@ const DestinationsDetails = [
 
 export default function page() {
   const [destinations, setDestinations] = useState<any>([]);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,7 +84,10 @@ export default function page() {
         <div className='px-20 grid grid-cols-3 gap-x-10 gap-y-16 py-14'>
           {destinations.map((destination:any) => (
               <div className='px-5 py-5 bg-white border-[1.5px] rounded-xl' key={destination.destinations_id}>
-              <Image alt='place' src={destination.image}/>
+              <Image alt='place' src={destination.image_path} 
+               width={500} // Set the appropriate width
+               height={300} // Set the appropriate height
+               />
               <h1 className='text-sm font-bold pt-5'>{destination.name}</h1>
               <p className='pt-3 text-[12.5px]'>
                 {destination.description.length>160 ? destination.description.substring(0, 160)+'...':destination.description  }
