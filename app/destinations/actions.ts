@@ -30,8 +30,7 @@ export async function destinationRead({ id }: { id: number }) {
   }
   // a function to read all destinations
   export async function destinationsRead() {
-    const { data, error } = await supabase.from("destinations").select();
-    console.log(data)
+    const { data, error } = await supabase.from("destinations").select("*");
     if (error) {
       console.error("Error fetching record:", error.message);
     } else {

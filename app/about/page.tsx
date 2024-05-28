@@ -82,9 +82,9 @@ export default function page() {
         <h1 className="font-bold text-3xl leading-relaxed">Meet the team</h1>
         <p className="text-[#F57906]">Here is a bit about us</p>
       </div>
-      <div className='grid grid-cols-3 justify-items-center mt-10 gap-x-10 gap-y-10 mb-20 px-5'>
+      <div className='custom-grid mt-10 gap-x-10 gap-y-10 mb-20 px-5'>
         {TeamData.map((employee) => (
-          <div key={employee.id} className='flex flex-col items-center shadow-xl shadow-gray-300 border py-7'>
+          <div key={employee.id} className='item flex flex-col items-center shadow-xl shadow-gray-300 border py-7'>
             <Image src={employee.image} alt={employee.name} className='rounded-full' width={200} height={200} />
             <h1 className='font-bold text-2xl pt-2'>{employee.name}</h1>
             <p className='text-[#F57906] text-sm'>{employee.position}</p>

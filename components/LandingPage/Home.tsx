@@ -11,7 +11,7 @@ export default function Home() {
                 <p className="text-sm leading-loose pt-3">Eestie Explorer helps you discover magical places in Estonia and allows you to customize the places you would like to visit.</p>
             </div>
             <div className="pt-5">
-                <MediumButton >Learn more</MediumButton>
+                <MediumButton><a href="/about">Learn more</a></MediumButton>
             </div>
         </div>
         <div className="w-[45%]">
