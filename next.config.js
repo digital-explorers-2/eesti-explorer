@@ -4,8 +4,8 @@ const nextConfig = {};
 
 
 module.exports = {
-    nextConfig,
-    images: {
-      domains: ['kuvdmztnxdacvqvwccwm.supabase.co'], // Add your Supabase storage hostname here
-    },
-  };
+  nextConfig,
+  images: {
+    domains: ['kuvdmztnxdacvqvwccwm.supabase.co'], // Add your Supabase storage hostname here
+  },
+};
