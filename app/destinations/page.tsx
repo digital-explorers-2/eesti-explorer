@@ -54,7 +54,7 @@ export default function page() {
               </div>
             </div>
             <div>
-              <p className='text-sm text-[#F57906] font-bold'>Cost: {destination.price}€</p>
+              <p className='text-sm text-[#F57906] font-bold'>Cost: {destination.price}€ per person</p>
             </div>
             <Dialog>
               <DialogTrigger asChild>
@@ -73,7 +73,7 @@ export default function page() {
                       </div>
                       <p className='font-bold'>Location: {destination.location}</p>
                     </div>
-                    <p className='text-base text-[#F57906] font-bold pt-2'>Cost: {destination.price}€</p>
+                    <p className='text-base text-[#F57906] font-bold pt-2'>Cost: {destination.price}€ per person</p>
                     <p className='mt-2 text-gray-700'>{destination.description}</p>
                     <div className='flex justify-center align-middle mt-5'>
                       <MediumButton>Add to cart</MediumButton>
