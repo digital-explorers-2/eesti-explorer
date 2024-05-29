@@ -89,6 +89,32 @@ Project WireFrames
 
 ![EestiDatabaseSchema drawio (1)](https://github.com/digital-explorers-2/eesti-explorer/assets/125539295/6d8796fa-e8dc-4e51-8ccd-613e7422a522)
 
+Admin Wireframes
+
+1. Admin Dashboard Module
+
+![Admin Dashboard](https://github.com/digital-explorers-2/eesti-explorer/assets/55990700/686b4b7a-fb0e-4e6b-84a1-e4fc1e002b9d)
+
+2. Admin Destinations Module
+
+![Admin Destinations](https://github.com/digital-explorers-2/eesti-explorer/assets/55990700/5d722438-dac1-4622-a605-6ca55e30ebc7)
+
+3. Admin Payment Module
+
+![Admin Payment](https://github.com/digital-explorers-2/eesti-explorer/assets/55990700/f467023f-c112-4c2f-86fa-92f5735a8191)
+
+4. Admin Users Module
+
+![Admin Users](https://github.com/digital-explorers-2/eesti-explorer/assets/55990700/f8e744c7-b095-40a8-9d6b-5c8cb551347f)
+
+5. Admin Tour Guides Module
+
+![Admin Tour Guides](https://github.com/digital-explorers-2/eesti-explorer/assets/55990700/586114aa-96fe-437f-83b1-f9553bd87197)
+
+
+
+
+
 
 
 
