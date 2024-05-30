@@ -3,13 +3,9 @@ Project Name :Eesti Explorer
 Authors
 
 1. Virginia Wanjiru
-
 2. Abigael Kirwa
-
 3. Emmanuel Kigen
-
 4. Crispus Nzano
-
 5. Natalie Ndetei
 
 Functional Requirements
@@ -103,3 +99,14 @@ Admin Wireframes
 
 5. Admin Tour Guides Module
    ![Admin Tour Guides](https://github.com/digital-explorers-2/eesti-explorer/assets/55990700/586114aa-96fe-437f-83b1-f9553bd87197)
+
+How to setup prettier
+
+1) install prettier extension
+2) go to pretteier docs then npm install by copying code from there
+3) Navigate to File > Preferences > Settings . 2 - Navigate to Text Editor > Formatting or search for editor. formatOnSave . 3 - Check the Editor: Format On Save option.
+4) right click in file then click format document with
+5) make default, then choose prettier
+6) click control save
+7) npx prettier --write . for all the files to be edited
+
