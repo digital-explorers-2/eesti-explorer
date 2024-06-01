@@ -3,6 +3,7 @@ import MainCharts from "@/components/Admin/MainCharts"
 import SideBar from "@/components/Admin/SideBar"
 import TopCards from "@/components/Admin/TopCards"
 import TopNav from "@/components/Admin/TopNav"
+import TopTourGuides from "@/components/Admin/TopTourGuides"
 
 export default function page() {
   return (
@@ -14,9 +15,7 @@ export default function page() {
         <TopNav />
         <TopCards />
         <MainCharts />
-        <div>
-          
-        </div>
+        <TopTourGuides />
       </div>
     </div>
   )
