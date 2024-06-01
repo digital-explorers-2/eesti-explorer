@@ -87,7 +87,7 @@ export default function MainCharts() {
   return (
     <div
       id="charts"
-      className="flex gap-10 my-5 mx-5">
+      className="flex gap-5 my-5 mx-5">
       <div
         id="left-chart"
         className="border-[1.3px] rounded-xl px-7 py-3 border-[#D3CBFB] w-3/4 h-48">

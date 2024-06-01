@@ -11,7 +11,7 @@ export default function page() {
       <SideBar />
       <div
         id="main"
-        className="rounded-3xl -ml-5 bg-white w-full">
+        className="rounded-3xl -ml-5 bg-white w-full pl-5">
         <TopNav />
         <TopCards />
         <MainCharts />
