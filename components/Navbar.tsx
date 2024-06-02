@@ -18,7 +18,8 @@ export default function () {
     const fetchUser = async () => {
       const {data, error} = await supabase.auth.getUser();
       if(data){
-        setUser(data.user);  
+        setUser(data.user);
+        console.log(user?.user_metadata.full_name );  
       }
       else{
         throw error;
@@ -65,8 +66,8 @@ export default function () {
               <div className="flex gap-5 -ml-20">
                 <a href="/profile">
                   <Avatar className="w-10 h-10">
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>CN</AvatarFallback>
+                    <AvatarImage src={user.user_metadata.picture} />
+                    <AvatarFallback> {user.user_metadata.full_name.slice(0, 1)}</AvatarFallback>
                   </Avatar>
                 </a>
                 <FaCartShopping className="color-grey-200 text-3xl mt-2" />

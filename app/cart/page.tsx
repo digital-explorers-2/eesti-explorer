@@ -1,77 +1,85 @@
 "use client"
-import { createClient } from "@/utils/supabase/client";
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import axios from 'axios';
-import { supabase } from '@/lib/supabaseClient';
-
-
+import { createClient } from "@/utils/supabase/client"
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import axios from "axios"
+import { supabase } from "@/lib/supabaseClient"
 
 type Destination = {
-  id: number;
-  description: string;
-  name: string;
-  location: string;
-  price: string;
-  image: string;
-};
+  id: number
+  description: string
+  name: string
+  location: string
+  price: string
+  image: string
+}
 
 const CartPage = () => {
-  const [destinations, setDestinations] = useState<Destination[]>([]);
-  const [user, setUser] = useState<any>(null);
+  const [destinations, setDestinations] = useState<Destination[]>([])
+  const [user, setUser] = useState<any>(null)
 
   useEffect(() => {
-    fetchDestinations();
-  }, []);
+    fetchDestinations()
+  }, [])
 
   const fetchDestinations = async () => {
     try {
-      const response = await axios.get('/api/destinations', {
-        params: { user_id: supabase.auth.getUser()}
-      });
+      const response = await axios.get("/api/destinations", {
+        params: { user_id: supabase.auth.getUser() },
+      })
 
-      setDestinations(response.data);
+      setDestinations(response.data)
     } catch (error) {
-      console.error('Error fetching destinations:');
+      console.error("Error fetching destinations:")
     }
-  };
+  }
 
   const handleRemove = async (id: number) => {
     try {
-      await axios.delete('/api/destinations', {
-        params: { id, user_id: supabase.auth.getUser()}
-      });
+      await axios.delete("/api/destinations", {
+        params: { id, user_id: supabase.auth.getUser() },
+      })
 
-      setDestinations(destinations.filter(destination => destination.id !== id));
+      setDestinations(destinations.filter(destination => destination.id !== id))
     } catch (error) {
-      console.error('Error removing destination:');
+      console.error("Error removing destination:")
     }
-  };
+  }
 
   const handleCheckout = () => {
     // Redirect to the checkout page
-    window.location.href = '/checkout';
-  };
+    window.location.href = "/checkout"
+  }
 
   const handleAddDestination = () => {
     // Redirect to the add destination page
-    window.location.href = '/add-destination';
-  };
+    window.location.href = "/add-destination"
+  }
 
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-4xl font-bold mb-8 text-center">My Destinations</h1>
       <div className="space-y-6">
         {destinations.map(destination => (
-          <div key={destination.id} className="flex items-center p-4 border rounded-lg shadow-md bg-white">
+          <div
+            key={destination.id}
+            className="flex items-center p-4 border rounded-lg shadow-md bg-white"
+          >
             <div className="w-24 h-24 rounded-full overflow-hidden mr-6">
-              <Image src={destination.image} alt={destination.name} width={96} height={96} />
+              <Image
+                src={destination.image}
+                alt={destination.name}
+                width={96}
+                height={96}
+              />
             </div>
             <div className="flex-1">
               <h2 className="text-xl font-bold">{destination.name}</h2>
               <p>{destination.description}</p>
               <p className="text-gray-500">Location: {destination.location}</p>
-              <p className="text-gray-500">Price of Entry: {destination.price}</p>
+              <p className="text-gray-500">
+                Price of Entry: {destination.price}
+              </p>
             </div>
             <button
               className="text-red-600 hover:text-red-800"
@@ -139,8 +147,7 @@ const CartPage = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CartPage;
-
+export default CartPage
