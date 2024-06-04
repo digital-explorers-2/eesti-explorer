@@ -1,8 +1,5 @@
 "use server"
-
 import { createClient } from "@/utils/supabase/server"
-//import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-//import { Button } from "@/components/ui/button";
 
 type Destination = {
   destinations_id: number;
@@ -14,14 +11,7 @@ type Destination = {
 
 };
 const supabase = createClient();
-  destinations_id: number
-  name: string
-  image_path: string
-  description: string
-  price: number
-  location: string
-}
-const supabase = createClient()
+
 
 // reads one destination for search functionality
 export async function destinationRead({ id }: { id: number }) {
@@ -46,6 +36,7 @@ export async function destinationsRead() {
     return data
   }
 }
+
   // a function to add a destination to cart
   export async function addCart({ id }: { id: number, user_id: number, tour_guide_id: number}) {
     const { error } = await supabase.from("cart").insert([{ id: "destination_id", user_id: "user_id", tour_guide_id: "tour_guide_id"}]);
@@ -55,4 +46,4 @@ export async function destinationsRead() {
       console.log("Added to cart successfully!");
     }
   }
-}
+
