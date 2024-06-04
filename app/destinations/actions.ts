@@ -11,6 +11,8 @@ type Destination = {
   description: string;
   price: number;
   location: string;
+  user_id: number;
+  tour_guide_id: string;
 
 };
 const supabase = createClient();
@@ -38,9 +40,9 @@ export async function destinationRead({ id }: { id: number }) {
       return data;
     }
   }
-  // a function that adds a destination to the cart after the user clicks the add button
-  export async function addCart({ id }: { id: number }) {
-    const { error } = await supabase.from("cart").insert([{ destination_id: id }]);
+  // a function to add a destination to cart
+  export async function addCart({ id }: { id: number, user_id: number, tour_guide_id: number}) {
+    const { error } = await supabase.from("cart").insert([{ id: "destination_id", user_id: "user_id", tour_guide_id: "tour_guide_id"}]);
     if (error) {
       console.error("Error adding to cart:", error.message);
     } else {
