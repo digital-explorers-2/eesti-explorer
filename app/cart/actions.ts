@@ -6,7 +6,7 @@ type Cart = {
   cart_id: number
   destinations_id: number
   tour_guide_id: number
-  destination_id: number
+  
 }
 
 const supabase = createClient()
