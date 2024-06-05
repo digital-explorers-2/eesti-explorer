@@ -115,7 +115,7 @@ const CartPage = () => {
         ))}
         <br />
 
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-center">
           <a href="/destinations">
           <button className="text-white bg-orange-500 hover:bg-orange-600 font-bold p-2 rounded-full">
             <svg
