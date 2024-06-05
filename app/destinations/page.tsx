@@ -5,20 +5,24 @@ import Navbar from "@/components/Navbar"
 import React, { useEffect, useState } from "react"
 import Image from "next/image"
 import { FaMap } from "react-icons/fa"
-import { destinationsRead } from "./actions"
+import { destinationsRead, addCart } from "./actions"
+import { createClient } from "@/utils/supabase/client"
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
 import MediumButton from "@/components/MediumButton"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Terminal } from "lucide-react"
 
-export default function page() {
+export default function Page() {
   const [destinations, setDestinations] = useState<any>([])
+  const [alert, setAlert] = useState<{ visible: boolean; message: string }>({ visible: false, message: "" })
+  const supabase = createClient()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,11 +30,34 @@ export default function page() {
         const response = await destinationsRead()
         setDestinations(response)
       } catch (error) {
-        throw new Error("Error fetching destinations")
+        console.error("Error fetching destinations", error)
       }
     }
     fetchData()
   }, [])
+
+  // function to add destination to cart
+  const addToCart = async (destination_id: number) => {
+    const { data, error } = await supabase.auth.getUser()
+    if (data.user) {
+      try {
+        await addCart({
+          destination_id,
+          user_id: data.user.id,
+          tour_guide_id: 0,
+        })
+        setAlert({ visible: true, message: "Added to cart successfully!" })
+        setTimeout(() => {
+          setAlert({ visible: false, message: "" })
+        }, 5000) // Hide alert after 5 seconds
+      } catch (error) {
+        console.error("Error adding to cart", error)
+      }
+    } else {
+      console.error("User not authenticated", error)
+    }
+  }
+
   return (
     <>
       <Navbar />
@@ -44,8 +71,7 @@ export default function page() {
         {destinations.map((destination: any) => (
           <div
             className="px-5 py-5 bg-white border-[1.5px] rounded-xl"
-            key={destination.destinations_id}
-          >
+            key={destination.destinations_id}>
             <Image
               alt="place"
               src={destination.image_path}
@@ -66,7 +92,11 @@ export default function page() {
                 <p className="font-bold">Location: {destination.location}</p>
               </div>
               <div>
-                <button className="rounded-full w-10 h-10 bg-[#F57906] text-white text-3xl text-center">
+                <button
+                  onClick={() => {
+                    addToCart(destination.destinations_id)
+                  }}
+                  className="rounded-full w-10 h-10 bg-[#F57906] text-white text-3xl text-center">
                   +
                 </button>
               </div>
@@ -86,8 +116,7 @@ export default function page() {
               </DialogTrigger>
               <DialogContent
                 style={{ backgroundColor: "white" }}
-                className="sm:max-w-[425px]"
-              >
+                className="sm:max-w-[425px]">
                 <DialogHeader>
                   <DialogTitle className="text-xl font-bold">
                     {destination.name}
@@ -123,6 +152,25 @@ export default function page() {
           </div>
         ))}
       </div>
+      {alert.visible && (
+        <div className="fixed bottom-5 right-5 z-50">
+          <Alert>
+            <Terminal className="h-4 w-4" />
+            <AlertTitle>Success!</AlertTitle>
+            <AlertDescription>
+              {alert.message}
+              <br />
+              <a href="/cart" className="text-orange-500">
+                Proceed to Cart
+              </a>
+              <br />
+              <a href="/cart" className="text-gray-500">
+                Continue Shopping
+              </a>
+            </AlertDescription>
+          </Alert>
+        </div>
+      )}
       <Footer />
     </>
   )
