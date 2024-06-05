@@ -5,12 +5,12 @@ import Navbar from "@/components/Navbar"
 import React, { useEffect, useState } from "react"
 import Image from "next/image"
 import { FaMap } from "react-icons/fa"
-import { destinationsRead } from "./actions"
+import { destinationsRead, addCart } from "./actions"
+import { createClient } from "@/utils/supabase/client"
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -19,6 +19,7 @@ import MediumButton from "@/components/MediumButton"
 
 export default function page() {
   const [destinations, setDestinations] = useState<any>([])
+  const supabase = createClient()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +32,26 @@ export default function page() {
     }
     fetchData()
   }, [])
+
+  //function to add destination to cart
+  const addToCart = async (destination_id: number) => {
+    const { data, error } = await supabase.auth.getUser()
+    if (data.user) {
+      try {
+        await addCart({
+          destination_id,
+          user_id: data.user.id,
+          tour_guide_id: 0,
+        })
+      } catch (error) {
+        console.log(error)
+        throw new Error("Error adding to cart")
+      }
+    } else {
+      throw error
+    }
+  }
+
   return (
     <>
       <Navbar />
@@ -44,8 +65,7 @@ export default function page() {
         {destinations.map((destination: any) => (
           <div
             className="px-5 py-5 bg-white border-[1.5px] rounded-xl"
-            key={destination.destinations_id}
-          >
+            key={destination.destinations_id}>
             <Image
               alt="place"
               src={destination.image_path}
@@ -66,7 +86,11 @@ export default function page() {
                 <p className="font-bold">Location: {destination.location}</p>
               </div>
               <div>
-                <button className="rounded-full w-10 h-10 bg-[#F57906] text-white text-3xl text-center">
+                <button
+                  onClick={() => {
+                    addToCart(destination.destinations_id)
+                  }}
+                  className="rounded-full w-10 h-10 bg-[#F57906] text-white text-3xl text-center">
                   +
                 </button>
               </div>
@@ -86,8 +110,7 @@ export default function page() {
               </DialogTrigger>
               <DialogContent
                 style={{ backgroundColor: "white" }}
-                className="sm:max-w-[425px]"
-              >
+                className="sm:max-w-[425px]">
                 <DialogHeader>
                   <DialogTitle className="text-xl font-bold">
                     {destination.name}
