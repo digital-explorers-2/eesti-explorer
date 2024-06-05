@@ -6,7 +6,7 @@ const supabase = createClient()
 export async function readBilling(user_id: string) {
   try {
     let { data: billing, error } = await supabase
-      .from("billing")
+      .from("cart")
       .select("*")
       .eq("user_id", user_id)
 
@@ -14,7 +14,7 @@ export async function readBilling(user_id: string) {
       const destinationsID = billing.map(
         billingData => billingData.destination_id,
       )
-      const tourGuideID = billing.map(billingData => billingData.tourguide_id)
+      const tourGuideID = billing.map(billingData => billingData.tour_guide_id)
 
       let { data: destData, error: destError } = await supabase
         .from("destinations")
