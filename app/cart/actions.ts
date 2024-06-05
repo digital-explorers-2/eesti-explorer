@@ -1,57 +1,40 @@
 "use server"
 import { createClient } from "@/utils/supabase/server"
-import { NextApiRequest, NextApiResponse } from "next"
-
-type Cart = {
-  cart_id: number
-  destinations_id: number
-  tour_guide_id: number
-  destination_id: number
-}
 
 const supabase = createClient()
-
 // Fetch destinations for a specific user
-export const getDestinations = async (
-  req: NextApiRequest,
-  res: NextApiResponse,
-) => {
+export const getDestinations = async (user_id:string) => {
   try {
-    const { user_id } = req.query
-    const { data, error } = await supabase
-      .from("destinations")
-      .select("*")
-      .eq("user_id", user_id)
-
-    if (error) {
-      console.error("Error fetching record:", error.message)
+    const { data:cartData, error:cartError } = await supabase.from("cart").select("*").eq("user_id", user_id)
+    if (cartError) {
+      console.error("Error fetching record:", cartError.message)
     }
 
-    res.status(200).json(data)
+    //extract destination ids from cart data
+    if(cartData){
+      const destinationId = cartData?.map((cartDetail)=>cartDetail.destination_id)
+      const {data:destinationData, error:destinationError}= await supabase.from("destinations").select("*").in("destinations_id", destinationId)
+      if(destinationError){
+        console.error("Error fetching record:", destinationError.message)
+      }
+      else{
+        console.log("Record fetched successfully!")
+        return destinationData
+      }
+    }
   } catch (error) {
-    res.status(500).json({ error: "Error" })
+    console.log("There was an error fetching destinations:", error)
   }
 }
 
 // Remove destination from cart
-export const removeDestination = async (
-  req: NextApiRequest,
-  res: NextApiResponse,
-) => {
+export const removeDestination = async (destination_id:number) => {
   try {
-    const { id, user_id } = req.query
-    const { error } = await supabase
-      .from("destinations")
-      .delete()
-      .eq("id", id)
-      .eq("user_id", user_id)
-
+    const { error } = await supabase.from("cart").delete().eq("destination_id", destination_id)
     if (error) {
       throw error
     }
-
-    res.status(200).json({ message: "Destination removed successfully" })
   } catch (error) {
-    res.status(500).json({ error: "Error" })
+    console.log("There was an error removing destination:", error)
   }
 }
