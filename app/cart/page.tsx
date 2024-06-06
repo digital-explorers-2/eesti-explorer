@@ -53,16 +53,11 @@ const CartPage = () => {
         </div>
         {destinations.map(destination => (
           <div className="mx-32 p-6 mb-10 bg-white border-2 border-white-500 rounded-lg shadow-lg dark:bg-white-800 dark:border-gray-100 flex" key={destination.destinations_id}>
-            <div className="py-3 pl-1 ">
-              <Image
+              <img
                 src={destination.image_path}
                 alt="Old Town gates"
-                width={300}
-                height={150}
-                style={{ width: "250px", height: "150px"}}
+                style={{ width: "150px", height: "150px", borderRadius:"50%", objectFit:"cover", marginTop:"10px"}}
               />
-            </div>
-
           <div className="flex">
             <div className="pl-4 mt-3">
               <h2 className="text-base font-bold">{destination.name}</h2>
