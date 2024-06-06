@@ -57,6 +57,7 @@ export default function () {
           <ul className="list-none flex gap-12 text-sm">
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
+            <li><a href="/cart">Cart</a></li>
             <li><a href="/destinations">Destinations</a></li>
           </ul>
         </div>
@@ -69,7 +70,7 @@ export default function () {
                     <AvatarFallback> {user.user_metadata.full_name.slice(0, 1)}</AvatarFallback>
                   </Avatar>
                 </a>
-                <a href="/cart"><FaCartShopping className="color-grey-200 text-3xl mt-2" /></a>
+                <FaCartShopping className="color-grey-200 text-3xl mt-2" />
                 <MediumButton onClick={logOutUser}>Log out</MediumButton>
               </div>
           ):(

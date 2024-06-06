@@ -49,7 +49,7 @@ useEffect(() => {
                setTourGuideFee(response.guide)
             }
         } catch (error) {
-            throw new Error("Error fetching billing")
+            console.log("Error fetching billing")
         }
     }
     handleReadBilling()

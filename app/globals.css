@@ -20,18 +20,3 @@
     grid-column-end: 4;
   }
 }
-
-
-.button-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.button-container button {
-  background-color: #f0f0f0;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
