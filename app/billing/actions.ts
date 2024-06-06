@@ -16,10 +16,7 @@ export async function readBilling(user_id: string) {
       )
       const tourGuideID = billing.map(billingData => billingData.tour_guide_id)
 
-      let { data: destData, error: destError } = await supabase
-        .from("destinations")
-        .select("price")
-        .in("destinations_id", destinationsID)
+      let { data: destData, error: destError } = await supabase.from("destinations").select("price").in("destinations_id", destinationsID)
 
     let { data: tourGuideData, error: tourGuideError } = await supabase
           .from("tour_guides")
