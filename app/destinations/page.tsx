@@ -16,9 +16,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import MediumButton from "@/components/MediumButton"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Terminal } from "lucide-react"
 
-export default function page() {
+export default function Page() {
   const [destinations, setDestinations] = useState<any>([])
+  const [alert, setAlert] = useState<{ visible: boolean; message: string }>({
+    visible: false,
+    message: "",
+  })
   const supabase = createClient()
 
   useEffect(() => {
@@ -27,13 +33,13 @@ export default function page() {
         const response = await destinationsRead()
         setDestinations(response)
       } catch (error) {
-        throw new Error("Error fetching destinations")
+        console.error("Error fetching destinations", error)
       }
     }
     fetchData()
   }, [])
 
-  //function to add destination to cart
+  // function to add destination to cart
   const addToCart = async (destination_id: number) => {
     const { data, error } = await supabase.auth.getUser()
     if (data.user) {
@@ -43,12 +49,15 @@ export default function page() {
           user_id: data.user.id,
           tour_guide_id: 0,
         })
+        setAlert({ visible: true, message: "Added to cart successfully!" })
+        setTimeout(() => {
+          setAlert({ visible: false, message: "" })
+        }, 5000) // Hide alert after 5 seconds
       } catch (error) {
-        console.log(error)
-        throw new Error("Error adding to cart")
+        console.error("Error adding to cart", error)
       }
     } else {
-      throw error
+      console.error("User not authenticated", error)
     }
   }
 
@@ -137,7 +146,7 @@ export default function page() {
                       {destination.description}
                     </p>
                     <div className="flex justify-center align-middle mt-5">
-                      <MediumButton>Add to cart</MediumButton>
+                      <MediumButton onClick={() => {addToCart(destination.destinations_id)}}>Add to cart</MediumButton>
                     </div>
                   </DialogDescription>
                 </DialogHeader>
@@ -146,6 +155,29 @@ export default function page() {
           </div>
         ))}
       </div>
+      {alert.visible && (
+        <div className="fixed bottom-5 right-5 z-50">
+          <Alert>
+            <Terminal className="h-4 w-4" />
+            <AlertTitle>Success!</AlertTitle>
+            <AlertDescription>
+              {alert.message}
+              <br />
+              <a
+                href="/cart"
+                className="text-orange-500">
+                Proceed to Cart
+              </a>
+              <br />
+              <a
+                href="/destinations"
+                className="text-gray-500">
+                Continue Shopping
+              </a>
+            </AlertDescription>
+          </Alert>
+        </div>
+      )}
       <Footer />
     </>
   )

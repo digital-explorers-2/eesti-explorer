@@ -26,7 +26,6 @@
     "crypto": "^1.0.1",
     "embla-carousel-autoplay": "^8.0.4",
     "embla-carousel-react": "^8.0.4",
-    "express": "^4.19.2",
     "geist": "^1.2.1",
     "google-pay": "^0.0.1",
     "googleapis": "^139.0.0",

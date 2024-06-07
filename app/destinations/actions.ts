@@ -36,4 +36,3 @@ export async function addCart({ destination_id, user_id, tour_guide_id }: { dest
     console.log("Added to cart successfully!");
   }
 }
-
