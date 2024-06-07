@@ -79,7 +79,10 @@ import { Terminal } from "lucide-react"
 
 export default function Page() {
   const [destinations, setDestinations] = useState<any>([])
-  const [alert, setAlert] = useState<{ visible: boolean; message: string }>({ visible: false, message: "" })
+  const [alert, setAlert] = useState<{ visible: boolean; message: string }>({
+    visible: false,
+    message: "",
+  })
   const supabase = createClient()
 
   useEffect(() => {
@@ -209,7 +212,7 @@ export default function Page() {
                       {destination.description}
                     </p>
                     <div className="flex justify-center align-middle mt-5">
-                      <MediumButton>Add to cart</MediumButton>
+                      <MediumButton onClick={() => {addToCart(destination.destinations_id)}}>Add to cart</MediumButton>
                     </div>
                   </DialogDescription>
                 </DialogHeader>
@@ -226,11 +229,15 @@ export default function Page() {
             <AlertDescription>
               {alert.message}
               <br />
-              <a href="/cart" className="text-orange-500">
+              <a
+                href="/cart"
+                className="text-orange-500">
                 Proceed to Cart
               </a>
               <br />
-              <a href="/cart" className="text-gray-500">
+              <a
+                href="/destinations"
+                className="text-gray-500">
                 Continue Shopping
               </a>
             </AlertDescription>
