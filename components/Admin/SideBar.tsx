@@ -64,7 +64,7 @@ export default function SideBar() {
                   <BsPersonSquare />
                 </div>
                 <div>
-                  <a href="/admin/tour-guides"><p className="text-sm font-medium">Tour-Guides</p></a>
+                  <a href="/admin/guides"><p className="text-sm font-medium">Tour-Guides</p></a>
                 </div>
               </li>
               <li className="flex gap-5 pl-5 text-white">
@@ -72,7 +72,7 @@ export default function SideBar() {
                   <IoIosStar />
                 </div>
                 <div>
-                  <p className="text-sm font-medium">Users</p>
+                  <a href="/users"><p className="text-sm font-medium">Users</p></a>
                 </div>
               </li>
             </ul>

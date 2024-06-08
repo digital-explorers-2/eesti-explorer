@@ -9,8 +9,7 @@ export async function readDataCounts(){
     const { data: userCount, error: userCountError } = await supabase.auth.admin.listUsers()
     if (userCountError) throw userCountError;
     const {data: tourGuidesCount, error: tourGuidesCountError} = await supabase.from('tour_guides').select('*')
-    const {data: paymentData, error: paymentCountError} = await supabase.from('payments').select('*')
-    console.log(userCount)   
+    const {data: paymentData, error: paymentCountError} = await supabase.from('payments').select('*') 
     try{
         if( destinationCount && userCount && tourGuidesCount && paymentData){
             const totalDestinations = destinationCount.length
@@ -23,7 +22,6 @@ export async function readDataCounts(){
                 totalPayments += paymentData[i].amount
             }
             const totalPaymentAmount = totalPayments
-            console.log(totalDestinations, totalUsers, totalTourGuides, totalPayments)
             return {totalDestinations, totalUsers, totalTourGuides, totalPaymentAmount}
         }
     }
