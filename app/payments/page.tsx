@@ -1,14 +1,66 @@
 "use client"
-import Footer from "@/components/Footer"
+
+
+import CheckoutBtn from "@/components/Checkout";
+import React, { useEffect, useState, useRef } from "react"
+import Navbar from "@/components/Navbar"
+import Heading from "@/components/Heading"
+
+export default function PaymentPage() {
+const paymentFormRef = useRef(null)
+
+  return (
+    <>
+    <Navbar />
+    <div className="text-center mt-5">
+      <Heading
+        underlinedText="Payment"
+        otherText=" Details"
+      />
+    </div>
+    <div className="flex justify-center mt-8">
+      <form  method="post" id="payment-form" ref={paymentFormRef}>
+        <div className="form-row">
+          <div id="card-element"></div>
+          <div id="card-errors" role="alert"></div>
+        </div>
+        <CheckoutBtn/>
+      </form>
+    </div>
+  </>
+  );
+}
+
+
+{/*"use client"
+
 import Heading from "@/components/Heading"
 import Navbar from "@/components/Navbar"
-import React, { useEffect, useState } from "react"
-import Image from "next/image"
-import { BiWorld } from "react-icons/bi"
-import { RiMoneyEuroBoxLine } from "react-icons/ri"
-import { guideRead } from "../tour-guide/actions"
+import React, { useEffect, useState, useRef } from "react"
+import { billingRead, googlePayments } from "./actions"
 
-export default function Payments() {
+const PaymentPage = () => {
+  const [billing, setBilling] = useState<any>(null)
+  const paymentFormRef = useRef(null)
+
+  useEffect(() => {
+    fetchBilling()
+    initializeGooglePayments()
+  }, [])
+
+  const fetchBilling = async () => {
+    try {
+      const billing = await billingRead({ id: 1 })
+      setBilling(billing)
+    } catch (error) {
+      console.error("Error fetching billing:", error)
+    }
+  }
+
+  const initializeGooglePayments = () => {
+    googlePayments()
+  }
+
   return (
     <>
       <Navbar />
@@ -18,47 +70,155 @@ export default function Payments() {
           otherText=" Details"
         />
       </div>
-      {/*<div className="grid grid-cols-1 gap-x-10 gap-y-16 py-14">
-        <div className="px-5 py-5 bg-white border-[1.5px] rounded-xl">
-          <div className="flex align-middle  justify-center">
-            <Image
-              alt="payment"
-              src="/images/payment.jpg"
-              width={300} // Set the appropriate width
-              height={100} // Set the appropriate height
-            />
-          </div>
-          <h1 className="text-sm font-bold pt-5">Payment Details</h1>
-          <div className="justify-between">
-            <div className="flex gap-5 text-sm pt-3">
-              <div className="pt-1">
-                <RiMoneyEuroBoxLine />
-              </div>
-              <p>Payment details</p>
-            </div>
-          </div>
-        </div>
-  </div>*/}
       <div className="flex justify-center mt-8">
-        <button className="text-white bg-orange-500 hover:bg-orange-600 font-bold py-2 px-4 rounded-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-6 h-6">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 4v16m8-8H4"
+        <script async src="https://pay.google.com/gp/p/js/pay.js"></script>
+        <form action=" " method="post" id="payment-form" ref={paymentFormRef}>
+          <div className="form-row">
+            <label htmlFor="card-element">Credit or debit card</label>
+            <div id="card-element"></div>
+            <div id="card-errors" role="alert"></div>
+          </div>
+          <button type="submit" className="text-white bg-orange-500 hover:bg-orange-600 font-bold py-2 px-4 rounded-lg flex items-center">
+            Buy with
+            <img
+              src="https://img.icons8.com/?size=100&id=Z5pgoU6ueRre&format=png&color=000000"
+              alt="Google Pay"
+              className="w-6 h-6 ml-2"
+              width= "20px"
+              height= "20px"
             />
-          </svg>
-          Pay
-        </button>
+            €{billing ? billing[0].amount : 0}
+          </button>
+        </form>
       </div>
-
-      <Footer />
     </>
   )
 }
+export default PaymentPage */}
+
+
+
+{/*"use client"
+
+import { google } from "googleapis"
+import Heading from "@/components/Heading"
+import Navbar from "@/components/Navbar"
+import React, { useEffect, useState, useRef } from "react"
+import { billingRead } from "./actions"
+
+
+const PaymentPage = () => {
+  const [billing, setBilling] = useState<any>(null)
+  const paymentFormRef = useRef(null)
+
+  useEffect(() => {
+    fetchBilling()
+    initializeGooglePayments()
+  }, [])
+
+  const fetchBilling = async () => {
+    try {
+      const billing = await billingRead({ id: 1 })
+      setBilling(billing)
+    } catch (error) {
+      console.error("Error fetching billing:", error)
+    }
+  }
+
+  const initializeGooglePayments = async () => {
+    try {
+      const response = await fetch("/api/google-pay")
+      const googlePaymentRequest = await response.json()
+
+      const paymentsClient = new google.payments.api.PaymentsClient({
+        environment: "TEST",
+      })
+
+      const isReadyToPayRequest = {
+        apiVersion: 2,
+        apiVersionMinor: 0,
+        allowedPaymentMethods: googlePaymentRequest.allowedPaymentMethods,
+      }
+
+      paymentsClient
+        .isReadyToPay(isReadyToPayRequest)
+        .then(function (response: any) {
+          if (response.result) {
+            // add a Google Pay payment button
+            const button = paymentsClient.createButton({
+              onClick: () => {
+                paymentsClient
+                  .loadPaymentData(googlePaymentRequest)
+                  .then(function (paymentData: any) {
+                    // if using gateway tokenization, pass this token without modification
+                    const paymentToken =
+                      paymentData.paymentMethodData.tokenizationData.token
+                    console.log("Payment Token:", paymentToken)
+                  })
+                  .catch(function (err: any) {
+                    // show error in developer console for debugging
+                    console.error(err)
+                  })
+              },
+              allowedPaymentMethods: googlePaymentRequest.allowedPaymentMethods,
+            })
+            if (paymentFormRef.current) {
+              ;(paymentFormRef.current as HTMLFormElement).appendChild(button)
+            }
+          }
+        })
+        .catch(function (err: any) {
+          // show error in developer console for debugging
+          console.error(err)
+        })
+    } catch (error) {
+      console.error("Error initializing Google Payments:", error)
+    }
+  }
+
+  return (
+    <>
+      <Navbar />
+      <div className="text-center mt-5">
+        <Heading
+          underlinedText="Payment"
+          otherText=" Details"
+        />
+      </div>
+      <div className="flex justify-center mt-8">
+        <script
+          async
+          src="https://pay.google.com/gp/p/js/pay.js"></script>
+        <form
+          action=""
+          method="post"
+          id="payment-form"
+          ref={paymentFormRef}>
+          <div className="form-row">
+            <label htmlFor="card-element">Credit or debit card</label>
+            <div id="card-element"></div>
+            <div
+              id="card-errors"
+              role="alert"></div>
+          </div>
+          <button
+            type="submit"
+            className="text-white bg-orange-500 hover:bg-orange-600 font-bold py-2 px-4 rounded-lg flex items-center">
+            Submit Payment
+          </button>
+        </form>
+      </div>
+      <div className="flex justify-center mt-8">
+        <button className="text-white bg-orange-500 hover:bg-orange-600 font-bold py-2 px-4 rounded-lg flex items-center">
+          Pay €{billing ? billing[0].amount : 0}
+        </button>
+      </div>
+    </>
+  )
+}
+
+export default PaymentPage*/}
+
+
+
+

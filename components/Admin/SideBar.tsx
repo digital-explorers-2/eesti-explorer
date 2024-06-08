@@ -40,7 +40,7 @@ export default function SideBar() {
                   <RxDashboard />
                 </div>
                 <div>
-                  <p className="text-sm font-extrabold">Dashboard</p>
+                  <a href="/admin"><p className="text-sm font-extrabold">Dashboard</p></a>
                 </div>
               </li>
               <li className="flex gap-5 pl-5 text-white">
@@ -48,7 +48,7 @@ export default function SideBar() {
                   <IoDocumentOutline />
                 </div>
                 <div>
-                  <p className="text-sm font-medium">Destinations</p>
+                  <a href="/admin/destinations"><p className="text-sm font-medium">Destinations</p></a>
                 </div>
               </li>
               <li className="flex gap-5 pl-5 text-white">
@@ -56,7 +56,7 @@ export default function SideBar() {
                   <FaEuroSign />
                 </div>
                 <div>
-                  <p className="text-sm font-medium">Payments</p>
+                  <a href="/admin/payments"><p className="text-sm font-medium">Payments</p></a>
                 </div>
               </li>
               <li className="flex gap-5 pl-5 text-white">
@@ -64,7 +64,7 @@ export default function SideBar() {
                   <BsPersonSquare />
                 </div>
                 <div>
-                  <p className="text-sm font-medium">Tour Guides</p>
+                  <a href="/admin/guides"><p className="text-sm font-medium">Tour-Guides</p></a>
                 </div>
               </li>
               <li className="flex gap-5 pl-5 text-white">
@@ -72,7 +72,7 @@ export default function SideBar() {
                   <IoIosStar />
                 </div>
                 <div>
-                  <p className="text-sm font-medium">Users</p>
+                  <a href="/users"><p className="text-sm font-medium">Users</p></a>
                 </div>
               </li>
             </ul>

@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function LargeButton({
+export default function MediumButton({
   children,
   onClick,
 }: {
@@ -9,14 +9,12 @@ export default function LargeButton({
 }) {
   return (
     <>
-    <a href="/payments">
       <button
         onClick={onClick}
-        className="text-sm bg-[#F57906] px-20 py-5 rounded-[7px] text-white font-semibold"
+        className="text-sm bg-[#C94747] px-5 py-2 rounded-[10px] text-white font-semibold "
       >
         {children}
       </button>
-      </a>
     </>
   )
 }
