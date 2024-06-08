@@ -69,3 +69,4 @@ export default function Login() {
     </div>
   )
 }
+// import statements from an index page and declare them in a single line much cleaner
