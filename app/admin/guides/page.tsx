@@ -17,6 +17,8 @@ export default function guides() {
         <TopCards />
         <TourGuides />
       </div>
+
+      
     </div>
   )
 }
