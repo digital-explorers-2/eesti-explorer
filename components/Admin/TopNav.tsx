@@ -35,7 +35,7 @@ export default function TopNav() {
   return (
     <div
       id="admin_top_nav"
-      className="flex justify-between py-5 px-5"
+      className="flex justify-between py-5 px-5 mr-5"
     >
       <div>
         <h1 className="text-xl font-bold">Overview</h1>

@@ -1,5 +1,5 @@
 "use client"
-import MainCharts from "@/components/Admin/MainCharts"
+import Destinations from "@/components/Admin/Destinations/destinations"
 import SideBar from "@/components/Admin/SideBar"
 import TopCards from "@/components/Admin/TopCards"
 import TopNav from "@/components/Admin/TopNav"
@@ -14,6 +14,7 @@ export default function page() {
         className="rounded-3xl -ml-5 bg-white w-full pl-5">
         <TopNav />
         <TopCards/>
+        <Destinations/>
       </div>
     </div>
   )
