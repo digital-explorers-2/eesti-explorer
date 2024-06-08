@@ -64,7 +64,7 @@ export default function SideBar() {
                   <BsPersonSquare />
                 </div>
                 <div>
-                  <a href="/admin/tour-guides"><p className="text-sm font-medium">Tour Guides</p></a>
+                  <a href="/admin/tour-guides"><p className="text-sm font-medium">Tour-Guides</p></a>
                 </div>
               </li>
               <li className="flex gap-5 pl-5 text-white">
