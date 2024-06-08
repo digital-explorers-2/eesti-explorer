@@ -1,4 +1,4 @@
-"use server"
+{/*"use server"
 
 import { createClient } from "@/utils/supabase/server";
 
@@ -16,7 +16,7 @@ export async function billingRead({ id }: { id: number }) {
     console.log("Record fetched successfully!");
     return data;
   }
-}
+}*/}
 
 {/*
 export async function googlePayments() {
