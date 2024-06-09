@@ -92,7 +92,9 @@ useEffect(() => {
       </div>
 
       <div className="flex justify-center pb-20">
+        <a href="/payments">
         <LargeButton> Proceed to Payment </LargeButton>
+        </a>
       </div>
     </>
   )
