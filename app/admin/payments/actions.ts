@@ -1,4 +1,4 @@
-"user server"
+"use server"
 
 import { createClient } from "@/utils/supabase/server"
 // function display one payment for search functionality

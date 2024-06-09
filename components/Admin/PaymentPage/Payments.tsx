@@ -11,7 +11,7 @@ interface Payment {
   user_id: string;
 }
 
-export default function Payments() {
+export default function Pay() {
   const [payments, setPayments] = useState<Payment[] | undefined>([]);
 
   useEffect(() => {
