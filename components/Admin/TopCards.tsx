@@ -1,16 +1,40 @@
+import { useEffect, useState } from "react"
 import {IoLocationOutline} from "react-icons/io5"
 import {FaArrowTrendUp} from "react-icons/fa6"
 import {FaArrowTrendDown} from "react-icons/fa6"
 import {BsGraphUpArrow} from "react-icons/bs"
 import {IoDocumentOutline} from "react-icons/io5"
 import {BsFillPeopleFill} from "react-icons/bs"
+import { readDataCounts } from "@/app/admin/action"
 
 export default function () {
+  const [countDestinations, setCountDestinations] = useState<number>(0)
+  const [countUsers, setCountUsers] = useState<number>(0)
+  const [countTourGuides, setCountTourGuides]= useState<number>(0)
+  const [totalPaymentAmount, setTotalPaymentAmount] = useState<number>(0)
+
+  useEffect(()=>{
+    const fetchCount = async () =>{
+      try{
+        const response = await readDataCounts();
+        if(response?.totalDestinations, response?.totalTourGuides, response?.totalUsers){
+          setCountDestinations(response.totalDestinations)
+          setCountUsers(response.totalUsers)
+          setCountTourGuides(response.totalTourGuides)
+          setTotalPaymentAmount(response.totalPaymentAmount)
+        }
+      }
+      catch(error){
+        console.log("Could not fetch counts ", error)
+      }
+    }
+    fetchCount();
+  },[])
   const cardDetails = [
     {
       id: 1,
       name: "Destinations",
-      value: "25.1 K",
+      value: countDestinations,
       color: "#B5FFCE",
       icon: <IoLocationOutline className="mt-2 text-lg" />,
       trendIcon: <FaArrowTrendUp className="text-[#43BE83] text-sm" />,
@@ -20,7 +44,7 @@ export default function () {
     {
       id: 2,
       name: "Payments",
-      value: "€ 2,435",
+      value: "€ "+ totalPaymentAmount,
       color: "#FFD9D7",
       icon: <BsGraphUpArrow className="mt-2 text-lg" />,
       trendIcon: <FaArrowTrendDown className="text-[#EA8F95] text-sm" />,
@@ -30,7 +54,7 @@ export default function () {
     {
       id: 3,
       name: "Users",
-      value: "3.5 M",
+      value: countUsers,
       color: "#B5FFCE",
       icon: <IoDocumentOutline className="mt-2 text-lg" />,
       trendIcon: <FaArrowTrendUp className="text-[#43BE83] text-sm" />,
@@ -40,7 +64,7 @@ export default function () {
     {
       id: 4,
       name: "Tour Guides",
-      value: "100",
+      value: countTourGuides,
       color: "#B5FFCE",
       icon: <BsFillPeopleFill className="mt-2 text-lg" />,
       trendIcon: <FaArrowTrendUp className="text-[#43BE83] text-sm" />,
@@ -51,7 +75,7 @@ export default function () {
   return (
     <div
       id="cards"
-      className="flex gap-5 px-5">
+      className="flex gap-7 px-5">
       {cardDetails.map(card => (
         <div
           className="border-[1.3px] rounded-xl px-7 py-3 border-[#D3CBFB]"

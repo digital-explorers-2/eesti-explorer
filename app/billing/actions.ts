@@ -2,7 +2,6 @@
 import { createClient } from "@/utils/supabase/server"
 
 const supabase = createClient()
-
 export async function readBilling(user_id: string) {
   try {
     let { data: billing, error } = await supabase
@@ -11,17 +10,11 @@ export async function readBilling(user_id: string) {
       .eq("user_id", user_id)
 
     if (billing) {
-      const destinationsID = billing.map(
-        billingData => billingData.destination_id,
-      )
+      const destinationsID = billing.map(billingData => billingData.destination_id,)
       const tourGuideID = billing.map(billingData => billingData.tour_guide_id)
 
       let { data: destData, error: destError } = await supabase.from("destinations").select("price").in("destinations_id", destinationsID)
-
-    let { data: tourGuideData, error: tourGuideError } = await supabase
-          .from("tour_guides")
-          .select("fee")
-          .in("tourGuides_id", tourGuideID)
+      let { data: tourGuideData, error: tourGuideError } = await supabase.from("tour_guides").select("fee").in("tourGuides_id", tourGuideID)
 
       if (destError) {
         throw new Error(destError.message)
@@ -42,11 +35,6 @@ export async function readBilling(user_id: string) {
             const guide = tourGuideData[0].fee
             return {sum, guide} // Add a comma after 'sum'
         }
-
-        // })
-    
-
-        
       }
     }
   } catch (error) {
