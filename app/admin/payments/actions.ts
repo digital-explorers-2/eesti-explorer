@@ -1,14 +1,16 @@
-"use server"
+"user server"
+
 import { createClient } from "@/utils/supabase/server"
+// function display one payment for search functionality
 
-const supabase = createClient();
 
-// reads one tourguide for search functionality
-export async function tourGuideRead({ id }: { id: number }) {
+const supabase = createClient()
+export async function paymentRead({ id }: { id: number }) {
+
   const { data, error } = await supabase
-    .from("tour_guides")
+    .from("payments")
     .select()
-    .eq("tourGuides_id", id)
+    .eq("payment_id", id)
   if (error) {
     console.error("Error fetching record:", error.message)
   } else {
@@ -16,10 +18,9 @@ export async function tourGuideRead({ id }: { id: number }) {
     return data
   }
 }
-
-// a function to read all tourguides
-export async function tourGuidesRead() {
-  const { data, error } = await supabase.from("tour_guides").select("*")
+// function to display all payments 
+export async function paymentsRead() {
+  const { data, error } = await supabase.from("payments").select("*")
   if (error) {
     console.error("Error fetching record:", error.message)
   } else {
