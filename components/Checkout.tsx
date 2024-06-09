@@ -68,7 +68,7 @@ export default function CheckoutBtn(): JSX.Element {
     return <></>
     console.log("Error") // Render nothing until the component is mounted
   }
-
+// checkout button
   return (
     <button
     type="button"
