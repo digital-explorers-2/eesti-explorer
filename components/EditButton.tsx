@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function MediumButton({
+export default function EditButton({
   children,
   onClick,
 }: {
