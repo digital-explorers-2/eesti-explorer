@@ -24,7 +24,7 @@ export default function Payments() {
   }, []);
 
   return (
-    <div id="tour-guides-section" className="mx-5 mt-12">
+    <div id="payments-section" className="mx-5 mt-12">
       <div className="mt-3 flex flex-col gap-5">
         {payments?.map((payment) => (
           <div
