@@ -11,7 +11,7 @@ export default function DeleteButton({
     <>
       <button
         onClick={onClick}
-        className="text-sm bg-[#C94747] px-5 py-1 rounded-[10px] text-white font-semibold "
+        className="text-sm bg-[#C94747] px-5 py-2 rounded-[10px] text-white font-semibold "
       >
         {children}
       </button>

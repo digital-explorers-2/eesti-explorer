@@ -20,6 +20,7 @@ import {
 import Image from "next/image"
 import LargeButton from "@/components/LargeButton"
 import MediumButton from "@/components/MediumButton"
+import { createClient } from "@/utils/supabase/client"
 
 export default function Destinations() {
   const [destinations, setdestinations] = useState<any[]>([])
@@ -27,14 +28,17 @@ export default function Destinations() {
   const [destinationLocation, setDestinationLocation] = useState<string>("")
   const [destinationDescription, setDestinationDescription] = useState<string>("")
   const [destinationRating, setDestinationRating] = useState<number>(0)
-  const [destinationImage, setDestinationImage] = useState<string>("")
+  const [destinationImage, setDestinationImage] = useState<File|null>(null)
   const [destinationPrice, setDestinationPrice] = useState<number>(0)
+  const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false)
+  const [createDialogOpen, setCreateDialogOpen] = useState<boolean>(false)
+  const supabase = createClient();
 
   //delete destination
   const handleDelete = async (id: number) => {
     try {
-      const response = await deleteDestination(id)
-      destinations.filter(destination => destination.destinations_id !== id)
+      await deleteDestination(id)
+      fetchDestinations()
       console.log("Destination deleted successfully")
     } catch (error) {
       console.log("Could not delete destination ", error)
@@ -44,13 +48,22 @@ export default function Destinations() {
   //create destination
   const handleCreate = async () => {
     try {
+      let image:string|undefined=undefined;
+      if(destinationImage){
+        let { data:res, error } = await supabase.storage.from('destination_images').upload(`${Date.now()}-${destinationImage.name}`, destinationImage, {cacheControl: '3600', upsert: false})
+        let {data} = supabase.storage.from('destination_images').getPublicUrl(`${res?.path}`)
+        image = data.publicUrl
+      }
       const response = await createDestination(
         destinationName,
         destinationDescription,
         destinationRating,
-        destinationImage,
+        destinationLocation,
+        image,
         destinationPrice
       )
+      setCreateDialogOpen(false)
+      fetchDestinations()
       console.log("Destination created successfully")
     } catch (error) {
       console.log("Could not create destination ", error)
@@ -60,9 +73,15 @@ export default function Destinations() {
   //update destinations
   const handleUpdate = async (destinationId:number) => {
     try {
+      let image:string|undefined=undefined;
+      if(destinationImage){
+        let { data:res, error } = await supabase.storage.from('destination_images').upload(`${Date.now()}-${destinationImage.name}`, destinationImage, {cacheControl: '3600', upsert: false})
+        let {data} = supabase.storage.from('destination_images').getPublicUrl(`${res?.path}`)
+        image = data.publicUrl
+      }
       const response = await updateDestination(
         destinationId,
-        destinationImage,
+        image,
         destinationName,
         destinationDescription,
         destinationLocation,
@@ -70,34 +89,49 @@ export default function Destinations() {
         destinationPrice
       )
       console.log("Destination updated successfully")
+      setEditDialogOpen(false)
+      fetchDestinations()
     } catch (error) {
       console.log("Could not update destination ", error)
     }
   }
 
   //this fills the values of the input to allow for edits
-  const handleEdit = (image:string, name: string, description: string, location:string, rating:number, price:number) => {
+  const handleEdit = (image:File, name: string, description: string, location:string, rating:number, price:number) => {
     setDestinationImage(image)
     setDestinationName(name)
     setDestinationLocation(location)
     setDestinationDescription(description)
     setDestinationRating(rating)
     setDestinationPrice(price)
+    setEditDialogOpen(true)
+  }
+
+  //this clears the values of the input to allow for creation
+  const handleCreateInputs = () => {
+    setDestinationImage(null)
+    setDestinationName("")
+    setDestinationLocation("")
+    setDestinationDescription("")
+    setDestinationRating(0)
+    setDestinationPrice(0)
+    setCreateDialogOpen(true)
+  }
+
+  const fetchDestinations = async () => {
+    try {
+      const response = await readDestinations()
+      if (response) {
+        setdestinations(response)
+      }
+    } catch (error) {
+      console.log("Could not fetch counts ", error)
+    }
   }
 
   useEffect(() => {
-    const fetchCount = async () => {
-      try {
-        const response = await readDestinations()
-        if (response) {
-          setdestinations(response)
-        }
-      } catch (error) {
-        console.log("Could not fetch counts ", error)
-      }
-    }
-    fetchCount()
-  }, [handleDelete])
+    fetchDestinations()
+  }, [])
 
   return (
     <div
@@ -132,7 +166,7 @@ export default function Destinations() {
             </div>
             <div className="flex items-center align-middle gap-4">
               {/* edit dialog */}
-              <Dialog>
+              <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
                 <DialogTrigger asChild>
                   <div>
                     <EditButton onClick={()=>handleEdit(destination.image_path, destination.name, destination.description, destination.location, destination.rating, destination.price)}>Edit</EditButton>
@@ -144,14 +178,16 @@ export default function Destinations() {
                   <DialogHeader>
                     <h1 className="font-bold">Edit Destination</h1>
                     <DialogDescription className="pt-3">
-                      <Image
-                        alt="place"
-                        src={destination.image_path}
-                        width={500}
-                        height={300}
-                      />
+                      <div className="flex justify-center">
+                        <Image
+                          alt="place"
+                          src={destination.image_path}
+                          width={100}
+                          height={150}
+                        />
+                      </div>
                       <div className="mt-2">
-                        <input className="w-full" type="file" accept="image/png" src={destinationImage} onChange={(e)=>{setDestinationImage(e.target.name)}} />
+                        <input className="w-full" type="file" accept="image/png" onChange={(e)=>setDestinationImage(e.target.files?.item(0) as File)} />
                       </div>
                       <div className="flex gap-5 text-sm pt-3 text-black">
                         <label className="pt-1 text-[#F57906] font-bold">Name</label>
@@ -167,11 +203,11 @@ export default function Destinations() {
                       </div>
                       <div className="flex gap-5 text-sm pt-3 text-black">
                         <label className="pt-1 text-[#F57906] font-bold">Rating</label>
-                        <input className="border px-2 py-1 rounded-lg border-gray-700 w-full" type="number" value={destinationRating} onChange={(e)=>{setDestinationRating(parseInt(e.target.value))}} />
+                        <input className="border px-2 py-1 rounded-lg border-gray-700 w-full" type="number" max={5} min={0} value={destinationRating} onChange={(e)=>{setDestinationRating(parseInt(e.target.value))}} />
                       </div>
                       <div className="flex gap-5 text-sm pt-3 text-black">
                         <label className="pt-1 text-[#F57906] font-bold">Cost:</label>
-                        <input className="border px-2 py-1 rounded-lg border-gray-700" type="number" value={destinationPrice} onChange={(e)=>{setDestinationPrice(parseInt(e.target.value))}} />
+                        <input className="border px-2 py-1 rounded-lg border-gray-700" type="number" min={0} value={destinationPrice} onChange={(e)=>{setDestinationPrice(parseInt(e.target.value))}} />
                       </div>
                       <div className="flex justify-center align-middle mt-5">
                         <EditButton onClick={()=>handleUpdate(destination.destinations_id)}>Edit</EditButton>
@@ -191,10 +227,10 @@ export default function Destinations() {
         ))}
       </div>
       {/* create a destination */}
-      <Dialog>
+      <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
         <DialogTrigger asChild>
         <div className="mt-3 flex justify-center">
-          <LargeButton>Add destination</LargeButton>
+          <LargeButton onClick={()=>handleCreateInputs()}>Add destination</LargeButton>
         </div>
         </DialogTrigger>
         <DialogContent
@@ -210,7 +246,7 @@ export default function Destinations() {
                 height={300}
               /> */}
               <div className="mt-2">
-                <input className="w-full" type="file" accept="image/png" src={destinationImage} onChange={(e)=>{setDestinationImage(e.target.name)}} />
+                <input className="w-full" type="file" accept="image/png" onChange={(e)=>setDestinationImage(e.target.files?.item(0) as File)} />
               </div>
               <div className="flex gap-5 text-sm pt-3 text-black">
                 <label className="pt-1 text-[#F57906] font-bold">Name</label>
@@ -226,11 +262,11 @@ export default function Destinations() {
               </div>
               <div className="flex gap-5 text-sm pt-3 text-black">
                 <label className="pt-1 text-[#F57906] font-bold">Rating</label>
-                <input className="border px-2 py-1 rounded-lg border-gray-700 w-full" type="number" value={destinationRating} onChange={(e)=>{setDestinationRating(parseInt(e.target.value))}} />
+                <input className="border px-2 py-1 rounded-lg border-gray-700 w-full" type="number" max={5} min={0} value={destinationRating} onChange={(e)=>{setDestinationRating(parseInt(e.target.value))}} />
               </div>
               <div className="flex gap-5 text-sm pt-3 text-black">
                 <label className="pt-1 text-[#F57906] font-bold">Cost:</label>
-                <input className="border px-2 py-1 rounded-lg border-gray-700" type="number" value={destinationPrice} onChange={(e)=>{setDestinationPrice(parseInt(e.target.value))}} />
+                <input className="border px-2 py-1 rounded-lg border-gray-700" type="number" min={0} value={destinationPrice} onChange={(e)=>{setDestinationPrice(parseInt(e.target.value))}} />
               </div>
               <div className="flex justify-center align-middle mt-5">
                 <MediumButton onClick={()=>handleCreate()}>Add Destination</MediumButton>
