@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
         },
       ],
       mode: "payment",
-      cancel_url: `${host}`,
+      cancel_url: `${host}/payments`,
       success_url: `${host}/success`,
     })
 

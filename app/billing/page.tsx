@@ -5,6 +5,7 @@ import LargeButton from "@/components/LargeButton"
 import { useEffect, useState } from "react"
 import { readBilling } from "./actions"
 import { createClient } from "@/utils/supabase/client"
+import CheckoutBtn from "@/components/Checkout";
 
 export default function Billing() {
     const [destinationFee, setDestinationFee] = useState<number>(0)
@@ -92,7 +93,9 @@ useEffect(() => {
       </div>
 
       <div className="flex justify-center pb-20">
-        <LargeButton> Proceed to Payment </LargeButton>
+        <div className="w-1/4">
+        <CheckoutBtn/>
+        </div>
       </div>
     </>
   )
