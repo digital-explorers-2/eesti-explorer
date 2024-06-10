@@ -19,15 +19,12 @@ export async function readDestinations(){
 }
 
 //create destination
-export async function createDestination(destinationName:string, destinationDescription:string, destinationRating:number, destinationImage:string, destinationPrice:number){
-    const {data, error} = await supabase.from('destinations').insert({name: destinationName, description: destinationDescription, rating: destinationRating, image_path: destinationImage, price: destinationPrice})
+export async function createDestination(destinationName:string, destinationDescription:string, destinationRating:number, destinationLocation:string, destinationImage?:string, destinationPrice?:number){
+    const {data, error} = await supabase.from('destinations').insert({name: destinationName, description: destinationDescription, rating: destinationRating, image_path: destinationImage, price: destinationPrice, location:destinationLocation})
     try{
         if(data){
             console.log("Successfully created destination ", data)
             return data
-        }
-        else{
-            console.log("Failed to create destination ", error)
         }
     }
     catch(error){
@@ -36,7 +33,7 @@ export async function createDestination(destinationName:string, destinationDescr
 }
 
 //update destination
-export async function updateDestination(destinationId:number, destinationImage:string, destinationName:string, destinationDescription:string, destinationLocation:string, destinationRating:number, destinationPrice:number){
+export async function updateDestination(destinationId:number, destinationImage?:string, destinationName?:string, destinationDescription?:string, destinationLocation?:string, destinationRating?:number, destinationPrice?:number){
     const {data, error} = await supabase.from('destinations').update({name: destinationName, image_path:destinationImage, description: destinationDescription, location:destinationLocation, rating: destinationRating, price: destinationPrice}).eq('destinations_id', destinationId)
     try{
         if(data){
