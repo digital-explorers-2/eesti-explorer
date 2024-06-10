@@ -1,4 +1,4 @@
-"user server"
+"use server"
 
 import { createClient } from "@/utils/supabase/server"
 // function display one payment for search functionality
@@ -28,3 +28,18 @@ export async function paymentsRead() {
     return data
   }
 }
+
+// function to display user name of specific billing id from supabase auth
+export async function userRead({ id }: { id: number }) {
+  const { data, error } = await supabase
+    .from("payments" && "user_metadata")
+    .select("Display Name")
+    .eq("user_id", id)
+  if (error) {
+    console.error("Error fetching record:", error.message)
+  } else {
+    console.log("Record fetched successfully!")
+    return data
+  }
+}
+

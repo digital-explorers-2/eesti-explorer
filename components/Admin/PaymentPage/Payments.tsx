@@ -11,7 +11,7 @@ interface Payment {
   user_id: string;
 }
 
-export default function Payments() {
+export default function Pay() {
   const [payments, setPayments] = useState<Payment[] | undefined>([]);
 
   useEffect(() => {
@@ -31,19 +31,11 @@ export default function Payments() {
             key={payment.payment_id}
             className="border-[1.3px] rounded-lg px-7 py-2 border-[#D3CBFB] w-[96%] flex gap-15 align-middle justify-between"
           >
-            <div className="flex my-2">
-              <Avatar className="w-7 h-7">
-                <AvatarImage
-                  src="https://eurosymbol.eu/img/euro_symbol.jpg"
-                  alt="€"
-                />
-              </Avatar>
-            </div>
             <div className="flex my-3 gap-20 justify-between">
-              <p className="text-[#797D8C] text-sm">{payment.payment_id}</p>
-              <p className="text-sm font-bold">{payment.billing_id}</p>
-              <p className="text-[#797D8C] text-sm">{payment.amount} Payment amount</p>
-              <p className="text-[#797D8C] text-sm">{payment.user_id}</p>
+              <p className="text-[#797D8C] text-sm">Payment ID:{payment.payment_id}</p>
+              <p className="text-sm font-bold">Billing ID:{payment.billing_id} </p>
+              <p className="text-[#797D8C] text-sm">Amount: € {payment.amount} </p>
+              <p className="text-[#797D8C] text-sm">User ID:{payment.user_id}</p>
             </div>
           </div>
         ))}
