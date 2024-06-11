@@ -4,9 +4,20 @@ import DeleteButton from "@/components/DeleteButton"
 import EditButton from "@/components/EditButton"
 import React, { useEffect, useState } from "react"
 import { deleteUser, readUsers } from "@/app/admin/users/actions"
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
 
 export default function users() {
   const [users, setUsers] = useState<any>([])
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [itemsPerPage] = useState<number>(3)
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -24,6 +35,36 @@ export default function users() {
 
   console.log("Users:", users) // Debugging: Log users state
 
+  //calculate the current items to display
+  const indexOfLastItem = currentPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+  const currentItems = users.slice(indexOfFirstItem, indexOfLastItem)
+
+  //handle page change
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber)
+  }
+
+  //calculate the page numbers
+  const pageNumbers = []
+  for (let i = 1; i <= Math.ceil(users.length / itemsPerPage); i++) {
+    pageNumbers.push(i)
+  }
+
+  //const handle previous page
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
+  //const handle next page
+  const handleNextPage = () => {
+    if (currentPage < pageNumbers.length) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
   return (
     <>
       {users && users.length > 0 ? (
@@ -31,7 +72,7 @@ export default function users() {
           id="tour-guides-section"
           className="mx-5 mt-12">
           <div className="mt-3 flex flex-col gap-5">
-            {users.map((users: any) => (
+            {currentItems.map((users: any) => (
               <div className="border-[1.3px] rounded-lg px-7 py-2  justify-between border-[#D3CBFB] w-[96%] flex gap-20 align-middle ">
                 <div className="flex my-2">
                   <Avatar className="w-7 h-7">
@@ -51,8 +92,9 @@ export default function users() {
                   </p>
                 </div>
                 <div className="flex justify-center gap-4 ">
-                  <EditButton>Edit</EditButton>
-                  <DeleteButton onClick={() => deleteUser(users.id)}>Delete</DeleteButton>
+                  <DeleteButton onClick={() => deleteUser(users.id)}>
+                    Delete
+                  </DeleteButton>
                 </div>
               </div>
             ))}
@@ -63,6 +105,43 @@ export default function users() {
           <p>Loading...</p>
         </div>
       )}
+
+      <div>
+      <Pagination className="mt-3">
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  href="#"
+                  onClick={() => handlePreviousPage()}
+                />
+              </PaginationItem>
+              {pageNumbers.map(number => (
+                <PaginationItem
+                  key={number}
+                  onClick={() => handlePageChange(number)}
+                  className={`${currentPage === number ? "text-white" : "text-black"}`}>
+                  <PaginationLink
+                    href="#"
+                    isActive={currentPage === number}>
+                    {number}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              <PaginationItem>
+                <PaginationNext
+                  href="#"
+                  onClick={() => handleNextPage()}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+      </div>
+
+
     </>
+    
+
   )
+
+  
 }
