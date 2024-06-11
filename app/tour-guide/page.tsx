@@ -8,12 +8,25 @@ import { BiWorld } from "react-icons/bi"
 import { RiMoneyEuroBoxLine } from "react-icons/ri"
 import { guideRead, updateCart } from "../tour-guide/actions"
 import { createClient } from "@/utils/supabase/client"
+import { useRouter } from "next/navigation"
 
 export default function Guides() {
   const [guides, setGuides] = useState<any>([])
   const supabase = createClient()
+  const router = useRouter()
 
   useEffect(() => {
+    const fetchUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+
+      if (!user) {
+        return router.replace("/login")
+      }
+    }
+    fetchUser()
+    
     const fetchData = async () => {
       try {
         const response = await guideRead()
