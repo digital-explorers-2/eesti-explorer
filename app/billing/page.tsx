@@ -12,7 +12,7 @@ export default function Billing() {
     const [tourGuideFee, setTourGuideFee] = useState<any>(0)
     const [numPeople, setNumPeople] = useState<number>(1) 
     const serviceFee = 5
-    const grandTotal = destinationFee + tourGuideFee + serviceFee
+    const grandTotal = (destinationFee * numPeople)  + tourGuideFee + serviceFee
     const router = useRouter() 
 
   const billingData = [
@@ -57,8 +57,10 @@ useEffect(() => {
                 throw new Error(error.message)
             }
             const response = await readBilling(data.user.id)
+            
             if(response){
-               setDestinationFee(response.sum)
+              const multiplier = response.sum * numPeople
+               setDestinationFee(multiplier)
                setTourGuideFee(response.guide)
             }
         } catch (error) {
@@ -66,11 +68,12 @@ useEffect(() => {
         }
     }
     handleReadBilling()
-}, [])
+},)
 
 const handleNumPeopleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   const value = parseInt(event.target.value, 10)
   setNumPeople(isNaN(value) || value < 1 ? 1 : value > 10 ? 10 : value)
+
 }
 
     return (
@@ -130,14 +133,14 @@ const handleNumPeopleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
             <h1 className="text-2xl font-bold">Grand Total</h1>
           </div>
           <div>
-            <h1 className="text-xl font-bold ">{grandTotal * numPeople} euros</h1> {/* Adjusted by number of people */}
+            <h1 className="text-xl font-bold ">{grandTotal} euros</h1> {/* Adjusted by number of people */}
           </div>
         </div>
 
         <div className="flex justify-center pb-20">
-          <a href="/payments">
-          <LargeButton> Proceed to Payment </LargeButton>
-          </a>
+          <div className="w-1/4">
+          <CheckoutBtn grandTotal={grandTotal}/> 
+          </div>
         </div>
       </>
     )
