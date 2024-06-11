@@ -11,7 +11,7 @@ export default function SideBar() {
     <>
       <div
         id="menu"
-        className="bg-[#39393B] w-1/4 h-200 pl-7 pr-12 py-10"
+        className="bg-[#39393B] w-1/4 h-[100vh] pl-7 pr-12 py-10"
       >
         <div
           id="logo"
