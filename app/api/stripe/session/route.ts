@@ -28,8 +28,8 @@ export async function POST(req: NextRequest) {
         },
       ],
       mode: "payment",
-      cancel_url: `${host}/payments`,
-      success_url: `${host}/success`,
+      cancel_url: `${host}/billing`,
+      success_url: `${host}/`,
     })
 
     return NextResponse.json({ sessionId: session.id })
