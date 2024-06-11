@@ -38,3 +38,16 @@ export const removeDestination = async (destination_id:number) => {
     console.log("There was an error removing destination:", error)
   }
 }
+
+//count destinations in cart
+export const countDestinations = async (user_id:string) => {
+  try {
+    const { data, error } = await supabase.from("cart").select("destination_id").eq("user_id", user_id)
+    if (error) {
+      console.error("Error fetching record:", error.message)
+    }
+    return data?.length
+  } catch (error) {
+    console.log("There was an error counting destinations:", error)
+  }
+}
