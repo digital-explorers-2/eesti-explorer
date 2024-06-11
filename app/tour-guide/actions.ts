@@ -25,19 +25,7 @@ export async function updateCart(user_id: string, tour_guide_id: string) {
     console.error("Error updating record:", error.message)
   } else {
     console.log(data)
-    return data
-  }
-}
-
-export async function updateGuideDate(guide_id: string, date: Date) {
-  const { data, error } = await supabase
-    .from("tour_guides")
-    .update({ dates_booked: date })
-    .eq("tourGuides_id", guide_id)
-
-  if (error) {
-    console.error("Error updating record:", error.message)
-  } else {
     redirect("/billing")
+    return data
   }
 }
