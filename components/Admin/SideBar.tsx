@@ -72,7 +72,7 @@ export default function SideBar() {
                   <IoIosStar />
                 </div>
                 <div>
-                  <a href="/users"><p className="text-sm font-medium">Users</p></a>
+                  <a href="/admin/users"><p className="text-sm font-medium">Users</p></a>
                 </div>
               </li>
             </ul>
