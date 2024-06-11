@@ -28,9 +28,9 @@ export const getDestinations = async (user_id:string) => {
 }
 
 // Remove destination from cart
-export const removeDestination = async (destination_id:number) => {
+export const removeDestination = async (destination_id:number, user_id:string) => {
   try {
-    const { error } = await supabase.from("cart").delete().eq("destination_id", destination_id)
+    const { error } = await supabase.from("cart").delete().eq("destination_id", destination_id).eq("user_id", user_id)
     if (error) {
       throw error
     }
