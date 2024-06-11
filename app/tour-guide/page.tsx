@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react"
 import Image from "next/image"
 import { BiWorld } from "react-icons/bi"
 import { RiMoneyEuroBoxLine } from "react-icons/ri"
-import { guideRead, updateCart } from "../tour-guide/actions"
+import { guideRead } from "../tour-guide/actions"
 import { createClient } from "@/utils/supabase/client"
 
 export default function Guides() {
@@ -26,16 +26,16 @@ export default function Guides() {
     fetchData()
   }, [])
 
-  const handleUpdate = async (tour_guide_id: string) => {
-    const { data, error } = await supabase.auth.getUser()
-    if (data.user) {
-      try {
-        const cartUpdate = await updateCart(data.user.id, tour_guide_id)
-      } catch (error) {
-        console.error("Error updating cart")
-      }
-    }
-  }
+  // const handleUpdate = async (tour_guide_id: string) => {
+  //   const { data, error } = await supabase.auth.getUser()
+  //   if (data.user) {
+  //     try {
+  //       const cartUpdate = await updateCart(data.user.id, tour_guide_id)
+  //     } catch (error) {
+  //       console.error("Error updating cart")
+  //     }
+  //   }
+  // }
   return (
     <>
       <Navbar />
@@ -82,11 +82,11 @@ export default function Guides() {
             </div>
             <div className="pt-5">
               {/* <a href="/billing"> */}
-              <button
+              {/* <button
                 onClick={() => handleUpdate(guides.tourGuides_id)}
                 className="bg-[#F57906] w-full py-2 rounded-md text-sm text-white font-bold">
                 Book Now
-              </button>
+              </button> */}
               {/* </a> */}
             </div>
           </div>
