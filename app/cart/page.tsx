@@ -1,11 +1,11 @@
 "use client"
 import { createClient } from "@/utils/supabase/client"
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import Navbar from "@/components/Navbar"
 import { FaTrash } from "react-icons/fa"
 import Heading from "@/components/Heading"
 import { getDestinations, removeDestination } from "./actions"
+import { data } from "autoprefixer"
 
 type Destination = {
   destinations_id: number
@@ -39,7 +39,11 @@ const CartPage = () => {
   }, [])
 
   const removeDestinationFromCart = async (destination_id:number) => {
-    const data = await removeDestination(destination_id)
+    const{data} = await supabase.auth.getUser()
+    if(data.user){
+      const user_id = data.user.id
+      await removeDestination(destination_id, user_id)
+    }
     const updatedDestinations = destinations.filter(destination=>destination.destinations_id !== destination_id)
     setDestinations(updatedDestinations)
   }
