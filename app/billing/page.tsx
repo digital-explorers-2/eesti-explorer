@@ -5,12 +5,15 @@ import LargeButton from "@/components/LargeButton"
 import { useEffect, useState } from "react"
 import { readBilling } from "./actions"
 import { createClient } from "@/utils/supabase/client"
+import { useRouter } from "next/navigation"
+
 
 export default function Billing() {
     const [destinationFee, setDestinationFee] = useState<number>(0)
     const [tourGuideFee, setTourGuideFee] = useState<any>(0)
     const serviceFee = 5
     const grandTotal = destinationFee + tourGuideFee + serviceFee
+    const router = useRouter()  
 
   const billingData = [
     {
@@ -37,7 +40,18 @@ export default function Billing() {
 const supabase = createClient()
 
 useEffect(() => {
-    const handleReadBilling = async () => {
+  const fetchUser = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    if (!user) {
+      return router.replace("/login")
+    }
+  }
+  fetchUser()
+
+  const handleReadBilling = async () => {
         try {
             const { data, error } = await supabase.auth.getUser()
             if (error) {
