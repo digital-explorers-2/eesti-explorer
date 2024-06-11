@@ -1,11 +1,12 @@
 "use client"
+
+import MainCharts from "@/components/Admin/MainCharts"
 import SideBar from "@/components/Admin/SideBar"
 import TopCards from "@/components/Admin/TopCards"
 import TopNav from "@/components/Admin/TopNav"
-import Destinations from "@/components/Admin/Destinations/destinations"
-import TourGuides from "@/components/Admin/Guides/TourGuides"
+import Pay from "@/components/Admin/PaymentPage/Payments"
 
-export default function guides() {
+export default function Payments() {
   return (
     <div className="flex">
       <SideBar />
@@ -14,7 +15,7 @@ export default function guides() {
         className="rounded-3xl -ml-5 bg-white w-full pl-5">
         <TopNav />
         <TopCards />
-        <Destinations/>
+        <Pay />
       </div>
     </div>
   )

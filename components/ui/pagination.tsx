@@ -20,7 +20,7 @@ const PaginationContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ul
     ref={ref}
-    className={cn("flex flex-row items-center gap-11", className)}
+    className={cn("flex flex-row items-center gap-1", className)}
     {...props}
   />
 ))
@@ -52,8 +52,7 @@ const PaginationLink = ({
         variant: isActive ? "outline" : "ghost",
         size,
       }),
-      className,
-      
+      className
     )}
     {...props}
   />
@@ -70,10 +69,8 @@ const PaginationPrevious = ({
     className={cn("gap-1 pl-2.5", className)}
     {...props}
   >
-    <div className="bg-[#1C1B1F] text-[#FAFAFA] rounded-full h-6 w-6 justify-center align-middle shadow-black">
-    <ChevronLeft className="h-4 w-4 my-1 mx-1" />
-    </div>
-    
+    <ChevronLeft className="h-4 w-4" />
+    <span>Previous</span>
   </PaginationLink>
 )
 PaginationPrevious.displayName = "PaginationPrevious"
@@ -88,9 +85,8 @@ const PaginationNext = ({
     className={cn("gap-1 pr-2.5", className)}
     {...props}
   >
-    <div className="bg-[#1C1B1F] text-[#FAFAFA] rounded-full h-6 w-6 justify-center align-middle shadow-2xl">
-    <ChevronRight className="h-4 w-4 my-1 mx-1" />
-    </div>
+    <span>Next</span>
+    <ChevronRight className="h-4 w-4" />
   </PaginationLink>
 )
 PaginationNext.displayName = "PaginationNext"
