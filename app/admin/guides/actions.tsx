@@ -1,12 +1,10 @@
-"use server"
-
+'use server'
 import { createClient } from "@/utils/supabase/server"
-import { redirect } from "next/navigation"
 
 const supabase = createClient()
 
 export async function guideRead() {
-  const { data, error } = await supabase.from("tour_guides").select("*")
+  const { data, error } = await supabase.from("tour_guides").select("*").order("tourGuides_id", { ascending: true })
   if (error) {
     console.error("Error fetching record:", error.message)
   } else {
@@ -16,8 +14,8 @@ export async function guideRead() {
 }
 
 //create destination
-export async function createGuide(first_name:string,last_name:string, rating:number, fee:number, image_path:string, email:string){
-    const {data, error} = await supabase.from('tour_guides').insert({first_name: first_name, last_name: last_name, rating: rating, image: image_path, price: fee})
+export async function createGuide(guideFirstName:string,guideLastName:string, guideRating:number, guideFee:number,guideCertification:string, guideImage?:string, guideEmail?:string, guideLanguages?:string ){
+    const {data, error} = await supabase.from('tour_guides').insert({first_name: guideFirstName, last_name: guideLastName, rating: guideRating, image_path: guideImage, fee: guideFee, languages:guideLanguages, email:guideEmail, museum_certification:guideCertification})
     try{
         if(data){
             return data
@@ -32,8 +30,8 @@ export async function createGuide(first_name:string,last_name:string, rating:num
 }
 
 //update destination
-export async function updateTourGuide(tourGuide_id:number, first_name:string, last_name:string, fee:number, rating:number , email:string ,image_path:string){
-    const {data, error} = await supabase.from('tour_guides').update({first_name: first_name, last_name:last_name, fee: fee, rating: rating, image_path:image_path, email: email}).eq('tourGuide_id', tourGuide_id)
+export async function updateGuide(guideId:number, guideFirstName:string,guideLastName:string, guideRating:number, guideFee:number,guideCertification:string, guideImage?:string, guideEmail?:string, guideLanguages?:string){
+    const {data, error} = await supabase.from('tour_guides').update({first_name: guideFirstName, last_name: guideLastName, rating: guideRating, image_path: guideImage, fee: guideFee, languages:guideLanguages, email:guideEmail, museum_certification:guideCertification}).eq('tourGuides_id', guideId)
     try{
         if(data){
             return data

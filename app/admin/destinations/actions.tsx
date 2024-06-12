@@ -4,7 +4,7 @@ const supabase = createClient();
 
 //read destinations
 export async function readDestinations(){
-    const {data: destinations, error: destinationsError} = await supabase.from('destinations').select('*')
+    const {data: destinations, error: destinationsError} = await supabase.from('destinations').select('*').order('destinations_id', {ascending: true})
     try{
         if(destinations){
             return destinations
