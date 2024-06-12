@@ -23,9 +23,51 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
 
 export default function Guides() {
   const [guides, setGuides] = useState<any>([])
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [itemsPerPage] = useState<number>(3)
+
+  //calculate the current items to display
+  const indexOfLastItem = currentPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+  const currentItems = guides.slice(indexOfFirstItem, indexOfLastItem)
+
+  //handle page change
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber)
+  }
+
+   //calculate the page numbers
+   const pageNumbers = []
+   for (let i = 1; i <= Math.ceil(guides.length / itemsPerPage); i++) {
+     pageNumbers.push(i)
+   }
+
+     //const handle previous page
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
+  //const handle next page
+  const handleNextPage = () => {
+    if (currentPage < pageNumbers.length) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,11 +82,11 @@ export default function Guides() {
     fetchData()
   }, [])
 
-  const handleDelete = async (id:number) => {
-    try{
+  const handleDelete = async (id: number) => {
+    try {
       await deleteGuide(id)
       // guides?.filter((guides: { id: any }) => guides.tour_guides_id !== id);
-    }catch(error){
+    } catch (error) {
       console.error("haijadelete kitu", error)
     }
   }
@@ -180,7 +222,7 @@ export default function Guides() {
       </Dialog>
 
       <div className="mt-3 grid gap-5">
-        {guides.map((tourGuide: any) => (
+        {currentItems.map((tourGuide: any) => (
           <div
             key={tourGuide.tourGuides_id}
             className="border-[1.3px] rounded-lg px-7 py-2 border-[#D3CBFB] w-[96%] grid grid-cols-12 items-center">
@@ -208,12 +250,46 @@ export default function Guides() {
             </div>
             <div className="col-span-3 flex justify-center gap-4">
               <EditButton>Edit</EditButton>
-              <Button className="text-sm bg-[#C94747] px-5 py-2 rounded-[10px] text-white font-semibold" onClick={() => handleDelete(tourGuide.tourGuides_id)}>Delete</Button>
+              <Button
+                className="text-sm bg-[#C94747] px-5 py-2 rounded-[10px] text-white font-semibold"
+                onClick={() => handleDelete(tourGuide.tourGuides_id)}>
+                Delete
+              </Button>
             </div>
           </div>
         ))}
       </div>
-      <PaginationPage />
+      <div className="flex justify-between mr-10 mt-5">
+          <Pagination className="mt-3">
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  href="#"
+                  onClick={() => handlePreviousPage()}
+                />
+              </PaginationItem>
+              {pageNumbers.map(number => (
+                <PaginationItem
+                  key={number}
+                  onClick={() => handlePageChange(number)}
+                  className={`${currentPage === number ? "text-white" : "text-black"}`}>
+                  <PaginationLink
+                    href="#"
+                    isActive={currentPage === number}>
+                    {number}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              <PaginationItem>
+                <PaginationNext
+                  href="#"
+                  onClick={() => handleNextPage()}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
+    
     </div>
   )
 }
