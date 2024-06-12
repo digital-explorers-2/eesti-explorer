@@ -1,7 +1,6 @@
 "use client"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import DeleteButton from "@/components/DeleteButton"
-import EditButton from "@/components/EditButton"
 import React, { useEffect, useState } from "react"
 import { deleteUser, readUsers } from "@/app/admin/users/actions"
 import {
