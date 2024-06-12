@@ -10,12 +10,12 @@ const asyncStripe = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "",
 )
 
-export default function CheckoutBtn(): JSX.Element {
+export default function CheckoutBtn(grandTotal:{grandTotal:number}): JSX.Element {
   const router = useRouter()
   const [destinationFee, setDestinationFee] = useState<number>(0)
   const [tourGuideFee, setTourGuideFee] = useState<number>(0)
   const serviceFee = 5
-  const grandTotal = destinationFee + tourGuideFee + serviceFee
+  // grandTotal = {grandTotal:destinationFee + tourGuideFee + serviceFee}
   const [isMounted, setIsMounted] = useState(false)
 
   const supabase = createClient()
@@ -46,7 +46,7 @@ export default function CheckoutBtn(): JSX.Element {
       const stripe = await asyncStripe
       const res = await fetch("/api/stripe/session", {
         method: "POST",
-        body: JSON.stringify({ amount: grandTotal }),
+        body: JSON.stringify({ amount: grandTotal.grandTotal }),
         headers: { "Content-Type": "application/json" },
       })
       const { sessionId } = await res.json()
@@ -74,7 +74,7 @@ export default function CheckoutBtn(): JSX.Element {
     type="button"
       onClick={handler}
       className="bg-[#F57906] w-full py-3 rounded-lg text-sm text-white font-bold">
-      Checkout €{grandTotal}
+      Checkout €{grandTotal.grandTotal}
     </button>
   )
 }

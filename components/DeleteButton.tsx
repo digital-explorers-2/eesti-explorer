@@ -5,7 +5,7 @@ export default function DeleteButton({
   onClick,
 }: {
   children: React.ReactNode
-  onClick?: () => void
+  onClick? : () => void
 }) {
   return (
     <>
