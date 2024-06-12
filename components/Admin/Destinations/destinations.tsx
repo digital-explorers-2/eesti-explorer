@@ -41,6 +41,7 @@ export default function Destinations() {
   const [destinationPrice, setDestinationPrice] = useState<number>(0)
   const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false)
   const [createDialogOpen, setCreateDialogOpen] = useState<boolean>(false)
+  const [destinationImagePath, setDestinationImagePath] = useState<string>("")
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [itemsPerPage] = useState<number>(3)
   const supabase = createClient()
@@ -129,6 +130,7 @@ export default function Destinations() {
     location: string,
     rating: number,
     price: number,
+    image_path: string,
   ) => {
     setDestinationImage(image)
     setDestinationName(name)
@@ -136,6 +138,7 @@ export default function Destinations() {
     setDestinationDescription(description)
     setDestinationRating(rating)
     setDestinationPrice(price)
+    setDestinationImagePath(image_path)
     setEditDialogOpen(true)
   }
 
@@ -242,6 +245,7 @@ export default function Destinations() {
                           destination.location,
                           destination.rating,
                           destination.price,
+                          destination.image_path,
                         )
                       }>
                       Edit
@@ -257,7 +261,7 @@ export default function Destinations() {
                       <div className="flex justify-center">
                         <Image
                           alt="place"
-                          src={destination.image_path}
+                          src={destinationImagePath}
                           width={100}
                           height={150}
                         />
