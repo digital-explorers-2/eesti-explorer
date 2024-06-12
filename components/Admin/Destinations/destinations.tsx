@@ -35,8 +35,7 @@ export default function Destinations() {
   const [destinations, setdestinations] = useState<any[]>([])
   const [destinationName, setDestinationName] = useState<string>("")
   const [destinationLocation, setDestinationLocation] = useState<string>("")
-  const [destinationDescription, setDestinationDescription] =
-    useState<string>("")
+  const [destinationDescription, setDestinationDescription] = useState<string>("")
   const [destinationRating, setDestinationRating] = useState<number>(0)
   const [destinationImage, setDestinationImage] = useState<File | null>(null)
   const [destinationPrice, setDestinationPrice] = useState<number>(0)
