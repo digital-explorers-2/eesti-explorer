@@ -39,6 +39,7 @@ export default function Destinations() {
   const [destinationRating, setDestinationRating] = useState<number>(0)
   const [destinationImage, setDestinationImage] = useState<File | null>(null)
   const [destinationPrice, setDestinationPrice] = useState<number>(0)
+  const [destinationId, setDestinationId] = useState<number>(0)
   const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false)
   const [createDialogOpen, setCreateDialogOpen] = useState<boolean>(false)
   const [destinationImagePath, setDestinationImagePath] = useState<string>("")
@@ -90,7 +91,7 @@ export default function Destinations() {
   }
 
   //update destinations
-  const handleUpdate = async (destinationId: number) => {
+  const handleUpdate = async () => {
     try {
       let image: string | undefined = undefined
       if (destinationImage) {
@@ -124,6 +125,7 @@ export default function Destinations() {
 
   //this fills the values of the input to allow for edits
   const handleEdit = (
+    id: number,
     image: File,
     name: string,
     description: string,
@@ -132,6 +134,7 @@ export default function Destinations() {
     price: number,
     image_path: string,
   ) => {
+    setDestinationId(id)
     setDestinationImage(image)
     setDestinationName(name)
     setDestinationLocation(location)
@@ -239,6 +242,7 @@ export default function Destinations() {
                     <EditButton
                       onClick={() =>
                         handleEdit(
+                          destination.destinations_id,
                           destination.image_path,
                           destination.name,
                           destination.description,
@@ -346,7 +350,7 @@ export default function Destinations() {
                       <div className="flex justify-center align-middle mt-5">
                         <EditButton
                           onClick={() =>
-                            handleUpdate(destination.destinations_id)
+                            handleUpdate()
                           }>
                           Edit
                         </EditButton>
