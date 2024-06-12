@@ -77,13 +77,13 @@ export default function Guides() {
       if (guideImage) {
         let { data: res, error } = await supabase.storage
           .from("guide_images")
-          .upload(${Date.now()}-${guideImage.name}, guideImage, {
+          .upload(`${Date.now()}-${guideImage.name}`, guideImage, {
             cacheControl: "3600",
             upsert: false,
           })
         let { data } = supabase.storage
           .from("guide_images")
-          .getPublicUrl(${res?.path})
+          .getPublicUrl(`${res?.path}`)
         image = data.publicUrl
       }
       const response = await createGuide(
@@ -136,13 +136,13 @@ export default function Guides() {
       if (guideImage) {
         let { data: res, error } = await supabase.storage
           .from("guide_images")
-          .upload(${Date.now()}-${guideImage.name}, guideImage, {
+          .upload(`${Date.now()}-${guideImage.name}`, guideImage, {
             cacheControl: "3600",
             upsert: false,
           })
         let { data } = supabase.storage
           .from("guide_images")
-          .getPublicUrl(${res?.path})
+          .getPublicUrl(`${res?.path}`)
         image = data.publicUrl
       }
       console.log(guideId)
@@ -433,7 +433,7 @@ export default function Guides() {
                   <PaginationItem
                     key={number}
                     onClick={() => handlePageChange(number)}
-                    className={${currentPage === number ? "text-white" : "text-black"}}>
+                    className={`${currentPage === number ? "text-white" : "text-black"}`}>
                     <PaginationLink
                       href="#"
                       isActive={currentPage === number}>
